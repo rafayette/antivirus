@@ -1,0 +1,11 @@
+# v0.0.1
+- Added overheat shaders
+- Added pixel shaders
+- Added posterization
+- Movement is now smoother
+- Wall textures now move
+- Added a floor texture
+- Added a sky
+- Added lookback (SPACEBAR)
+- Added version indicator
+- Added README.md

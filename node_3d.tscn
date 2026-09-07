@@ -88,6 +88,13 @@ shadow_size = 5
 shadow_color = Color(0, 0, 0, 0.24705882)
 shadow_offset = Vector2(0, 0)
 
+[sub_resource type="LabelSettings" id="LabelSettings_tereu"]
+font = ExtResource("1_jka67")
+font_size = 24
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.89411765)
+shadow_offset = Vector2(0, 0)
+
 [node name="Node3D" type="Node3D" unique_id=303821375]
 
 [node name="PostProcessing" type="CanvasLayer" parent="." unique_id=1573296765]
@@ -171,6 +178,18 @@ offset_right = 205.0
 offset_bottom = 97.0
 text = "70*c"
 label_settings = SubResource("LabelSettings_cjccb")
+
+[node name="Version" type="Label" parent="UI" unique_id=399624105]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -90.0
+offset_right = 205.0
+grow_vertical = 0
+text = "v0.0.1"
+label_settings = SubResource("LabelSettings_tereu")
+vertical_alignment = 2
 
 [connection signal="body_entered" from="Player/DamageCheck" to="Player" method="_on_damage_check_body_entered"]
 [connection signal="body_exited" from="Player/DamageCheck" to="Player" method="_on_damage_check_body_exited"]
