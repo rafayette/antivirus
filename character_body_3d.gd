@@ -8,7 +8,10 @@ var timer = 0.0
 
 @export var temperature = 40.0
 @onready var damageCheck = $DamageCheck
-@onready var temperatureLabel = $"../UI/TempPercentage"
+@onready var statusBar: ShaderMaterial = $"../UI/StatusBar".material
+@onready var statusBarBackground: ShaderMaterial = $"../UI/StatusBarBackground".material
+@onready var weapon_sprite: ShaderMaterial = $"../UI/Weapon".material
+@onready var temperatureBar = $"../UI/TemperatureProgressBar"
 @onready var overheatLabel = $"../UI/OverheatWarning"
 @onready var shaderRect = $"../PostProcessing/ColorRect"
 @onready var camera = $Camera3D
@@ -57,14 +60,18 @@ func _process(delta: float):
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	var increase = temperaturePerTick * delta * 60
-	temperature += increase
+	temperature = min(temperature + increase, 140.0)
 	if is_zero_approx(increase):
 		var decrease = 0.05
 		if direction == Vector3.ZERO:
 			decrease = 0.2
 		temperature = maxf(40.0, temperature - decrease * delta * 60)
-	temperatureLabel.text = str(int(floor((temperature / 130.0) * 100))) + "%"
+	var percentage = (temperature - 40.0) / 90.0
+	statusBar.set_shader_parameter("heat_shift", percentage)
+	statusBarBackground.set_shader_parameter("heat_shift", percentage)
+	weapon_sprite.set_shader_parameter("heat_shift", percentage)
 	shaderRect.material.set_shader_parameter("temperature", temperature)
+	temperatureBar.value = percentage * 100
 	
 	if temperature >= 130.0:
 		timer += delta

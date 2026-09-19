@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://cipj7dtlir42g"]
+
+[ext_resource type="Script" uid="uid://d1gpm6pahp0ej" path="res://pepsi_man.gd" id="1_2o2l7"]
+[ext_resource type="Shader" uid="uid://c7w7nfo4u448a" path="res://enemyfade.gdshader" id="2_tssec"]
+[ext_resource type="Texture2D" uid="uid://4aedfgtrisn2" path="res://assets/placeholder_enemy.jpg" id="3_s0lov"]
+[ext_resource type="AudioStream" uid="uid://c52fta4mnwv8y" path="res://assets/sfx/virusDie.wav" id="4_k4ipx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cdqbm"]
+size = Vector3(1.7773438, 2.0584717, 1.6982422)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2wc3h"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_tssec")
+shader_parameter/albedo_texture = ExtResource("3_s0lov")
+shader_parameter/dissolve_progress = 0.0
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/scanline_color = Color(0.2, 0.6, 1, 1)
+shader_parameter/scanline_width = 0.01
+shader_parameter/outline_thickness = 0.003
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ibgg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_s0lov")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="PepsiMan" type="CharacterBody3D" unique_id=578466623 groups=["enemy"]]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_2o2l7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=195285334]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.42338872, 0)
+shape = SubResource("BoxShape3D_cdqbm")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=1104612094]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_2wc3h")
+billboard = 2
+sprite_frames = SubResource("SpriteFrames_8ibgg")
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=841625462]
+target_position = Vector3(0, 0, 25)
+debug_shape_custom_color = Color(1, 0, 0, 1)
+debug_shape_thickness = 5
+
+[node name="DeathSFX" type="AudioStreamPlayer3D" parent="." unique_id=524179806]
+stream = ExtResource("4_k4ipx")
+volume_db = -10.0

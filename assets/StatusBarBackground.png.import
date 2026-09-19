@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blnispwswpefe"
-path="res://.godot/imported/reference.jpg-041f5ce428dd4a9fb4bfe0a131dc8ea0.ctex"
+uid="uid://dfrom6h3kkkc6"
+path="res://.godot/imported/StatusBarBackground.png-e9d22b6ab6e7967001f90e7a6cb67058.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/reference.jpg"
-dest_files=["res://.godot/imported/reference.jpg-041f5ce428dd4a9fb4bfe0a131dc8ea0.ctex"]
+source_file="res://assets/StatusBarBackground.png"
+dest_files=["res://.godot/imported/StatusBarBackground.png-e9d22b6ab6e7967001f90e7a6cb67058.ctex"]
 
 [params]
 
