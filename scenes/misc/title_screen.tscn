@@ -1,0 +1,201 @@
+[gd_scene format=3 uid="uid://ckkyf5rjtstpn"]
+
+[ext_resource type="Texture2D" uid="uid://c2qpwi1433y5c" path="res://assets/textures/sky.png" id="1_o1ls0"]
+[ext_resource type="Script" uid="uid://bry5wl6f2t1rx" path="res://scripts/sky_rotate.gd" id="2_o1ls0"]
+[ext_resource type="FontFile" uid="uid://csuih1q3p32sw" path="res://assets/fonts/TerminusTTF-4.49.3.ttf" id="3_eohmq"]
+[ext_resource type="FontFile" uid="uid://pnbphiys52ma" path="res://assets/fonts/TerminusTTF-Bold-4.49.3.ttf" id="4_igbr1"]
+[ext_resource type="Script" uid="uid://cpb2kp533v3lc" path="res://scripts/play.gd" id="5_cq0pj"]
+[ext_resource type="Script" uid="uid://cdp128be61veg" path="res://scripts/credits.gd" id="6_cq0pj"]
+[ext_resource type="Shader" uid="uid://ecm8lygcuo1b" path="res://shaders/Retro2D.gdshader" id="6_w8hmc"]
+[ext_resource type="Script" uid="uid://xlfcclpwiuoq" path="res://scripts/version.gd" id="7_eohmq"]
+[ext_resource type="Shader" uid="uid://8ietow42vev6" path="res://shaders/crt.gdshader" id="7_ff23m"]
+[ext_resource type="Script" uid="uid://cxvbii2p23llp" path="res://scripts/quit.gd" id="7_igbr1"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jw77y"]
+panorama = ExtResource("1_o1ls0")
+energy_multiplier = 0.1
+
+[sub_resource type="Sky" id="Sky_0t7me"]
+sky_material = SubResource("PanoramaSkyMaterial_jw77y")
+
+[sub_resource type="Environment" id="Environment_cjccb"]
+background_mode = 2
+background_color = Color(0, 0.078431375, 0, 1)
+background_energy_multiplier = 6.45
+sky = SubResource("Sky_0t7me")
+glow_enabled = true
+fog_light_color = Color(2.0455569e-07, 0.17567915, 0.07111321, 1)
+fog_light_energy = 0.51
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hafda"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gmv4x"]
+line_spacing = 0.0
+font = ExtResource("3_eohmq")
+font_size = 32
+font_color = Color(0, 0.58431375, 0, 1)
+outline_size = 1
+outline_color = Color(0, 0.58431375, 0, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_05l2w"]
+font = ExtResource("4_igbr1")
+font_size = 64
+
+[sub_resource type="Gradient" id="Gradient_hafda"]
+colors = PackedColorArray(0, 0, 0, 1, 0.012617188, 0.012617188, 0.012617188, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cjccb"]
+gradient = SubResource("Gradient_hafda")
+fill_from = Vector2(0, 0.2173913)
+fill_to = Vector2(0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cq0pj"]
+font = ExtResource("4_igbr1")
+font_size = 32
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tpml5"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tereu"]
+noise = SubResource("FastNoiseLite_tpml5")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jqemp"]
+shader = ExtResource("6_w8hmc")
+shader_parameter/pixel_size = 2.0
+shader_parameter/levels = 25.0
+shader_parameter/gamma = Vector2(0.9, 0.9)
+shader_parameter/temperature = 40.0
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_tereu")
+shader_parameter/haze_strength = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycf27"]
+shader = ExtResource("7_ff23m")
+shader_parameter/scanline_intensity = 0.338000016055
+shader_parameter/scanline_count = 360.0
+shader_parameter/curvature = 0.1250000059375
+shader_parameter/vignette_strength = 0.8
+shader_parameter/chromatic_aberration = 0.0010000000475
+shader_parameter/flicker_speed = 6.0
+shader_parameter/flicker_intensity = 0.03
+
+[node name="TitleScreen" type="Node" unique_id=1491325493]
+
+[node name="Background" type="Node3D" parent="." unique_id=29016512]
+
+[node name="Camera3D" type="Camera3D" parent="Background" unique_id=2095697044]
+current = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=966516465]
+environment = SubResource("Environment_cjccb")
+script = ExtResource("2_o1ls0")
+
+[node name="TitleUI" type="CanvasLayer" parent="." unique_id=678481208]
+
+[node name="Label" type="Label" parent="TitleUI" unique_id=750390060]
+texture_filter = 3
+material = SubResource("ShaderMaterial_hafda")
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -446.0
+offset_top = 44.0
+offset_right = 450.0
+offset_bottom = 329.0
+grow_horizontal = 2
+theme_override_constants/line_spacing = 3
+text = "  ___   _   _ _____ _____ _   _ ___________ _   _ _____ 
+ / _ \\ | \\ | |_   _|_   _| | | |_   _| ___ \\ | | /  ___|
+/ /_\\ \\|  \\| | | |   | | | | | | | | | |_/ / | | \\ `--. 
+|  _  || . ` | | |   | | | | | | | | |    /| | | |`--. \\
+| | | || |\\  | | |  _| |_\\ \\_/ /_| |_| |\\ \\| |_| /\\__/ /
+\\_| |_/\\_| \\_/ \\_/  \\___/ \\___/ \\___/\\_| \\_|\\___/\\____/ 
+                                                        
+                                                        "
+label_settings = SubResource("LabelSettings_gmv4x")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TitleUI" unique_id=1742449344]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -448.5
+offset_top = -65.5
+offset_right = -128.5
+offset_bottom = 137.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Play" type="Label" parent="TitleUI/VBoxContainer" unique_id=636212982]
+texture_filter = 3
+material = SubResource("ShaderMaterial_hafda")
+layout_mode = 2
+mouse_filter = 0
+text = "> jogar"
+label_settings = SubResource("LabelSettings_05l2w")
+script = ExtResource("5_cq0pj")
+
+[node name="Credits" type="Label" parent="TitleUI/VBoxContainer" unique_id=187101458]
+texture_filter = 3
+material = SubResource("ShaderMaterial_hafda")
+layout_mode = 2
+mouse_filter = 0
+text = "> créditos"
+label_settings = SubResource("LabelSettings_05l2w")
+script = ExtResource("6_cq0pj")
+
+[node name="Quit" type="Label" parent="TitleUI/VBoxContainer" unique_id=982616983]
+texture_filter = 3
+material = SubResource("ShaderMaterial_hafda")
+layout_mode = 2
+mouse_filter = 0
+text = "> sair"
+label_settings = SubResource("LabelSettings_05l2w")
+script = ExtResource("7_igbr1")
+
+[node name="TextureRect" type="TextureRect" parent="TitleUI" unique_id=349582971]
+z_index = -1
+offset_right = 1158.0
+offset_bottom = 649.0
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_cjccb")
+
+[node name="Version" type="Label" parent="TitleUI" unique_id=1144874032]
+texture_filter = 3
+material = SubResource("ShaderMaterial_hafda")
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = -65.0
+offset_right = 199.0
+grow_vertical = 0
+mouse_filter = 0
+text = "vX.X.X"
+label_settings = SubResource("LabelSettings_cq0pj")
+vertical_alignment = 2
+script = ExtResource("7_eohmq")
+
+[node name="PostProcessing" type="CanvasLayer" parent="." unique_id=1603341752]
+
+[node name="ColorRect" type="ColorRect" parent="PostProcessing" unique_id=200495837]
+material = SubResource("ShaderMaterial_jqemp")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CRT" type="ColorRect" parent="PostProcessing" unique_id=942988064]
+material = SubResource("ShaderMaterial_ycf27")
+offset_left = -389.0
+offset_top = -117.0
+offset_right = 1361.0
+offset_bottom = 870.0
+mouse_filter = 2
+
+[connection signal="gui_input" from="TitleUI/VBoxContainer/Play" to="TitleUI/VBoxContainer/Play" method="_on_gui_input"]
+[connection signal="gui_input" from="TitleUI/VBoxContainer/Credits" to="TitleUI/VBoxContainer/Credits" method="_on_gui_input"]
+[connection signal="gui_input" from="TitleUI/VBoxContainer/Quit" to="TitleUI/VBoxContainer/Quit" method="_on_gui_input"]

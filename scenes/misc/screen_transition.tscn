@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c0byafj3llwij"]
+
+[ext_resource type="Script" uid="uid://cnepoj0kegsm" path="res://scripts/screen_transition.gd" id="1_47y2t"]
+[ext_resource type="Shader" uid="uid://cvr04pmho0q06" path="res://shaders/menu_melt.gdshader" id="2_5ofoy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_131ss"]
+shader = ExtResource("2_5ofoy")
+shader_parameter/melt_progress = 0.0
+shader_parameter/column_count = 120.0
+shader_parameter/randomness = 0.4
+
+[node name="ScreenTransition" type="CanvasLayer" unique_id=1611283490]
+layer = 100
+script = ExtResource("1_47y2t")
+
+[node name="MeltRect" type="TextureRect" parent="." unique_id=1693508321]
+visible = false
+material = SubResource("ShaderMaterial_131ss")
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2

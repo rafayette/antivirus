@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://cno6k21ggiydk"]
+
+[ext_resource type="Script" uid="uid://dbl6ey7aqe20f" path="res://scripts/pause_2.gd" id="1_73bk0"]
+[ext_resource type="FontFile" uid="uid://pnbphiys52ma" path="res://assets/fonts/TerminusTTF-Bold-4.49.3.ttf" id="1_313x3"]
+[ext_resource type="Script" uid="uid://cx1dfp73ypsys" path="res://resume.gd" id="2_73bk0"]
+[ext_resource type="Script" uid="uid://b42t7h4cl3ugv" path="res://return.gd" id="3_86pvl"]
+[ext_resource type="Shader" uid="uid://ecm8lygcuo1b" path="res://shaders/Retro2D.gdshader" id="4_6xax0"]
+[ext_resource type="Shader" uid="uid://8ietow42vev6" path="res://shaders/crt.gdshader" id="5_brp4s"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hafda"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_05l2w"]
+font = ExtResource("1_313x3")
+font_size = 64
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nrrw6"]
+shader = ExtResource("4_6xax0")
+shader_parameter/pixel_size = 10.0
+shader_parameter/levels = 8.0
+shader_parameter/gamma = Vector2(1, 1)
+shader_parameter/temperature = 0.0
+shader_parameter/haze_strength = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycf27"]
+shader = ExtResource("5_brp4s")
+shader_parameter/scanline_intensity = 0.338000016055
+shader_parameter/scanline_count = 360.0
+shader_parameter/curvature = 0.1250000059375
+shader_parameter/vignette_strength = 0.8
+shader_parameter/chromatic_aberration = 0.0010000000475
+shader_parameter/flicker_speed = 6.0
+shader_parameter/flicker_intensity = 0.03
+
+[node name="PauseScreen" type="Node" unique_id=1491325493]
+process_mode = 3
+script = ExtResource("1_73bk0")
+
+[node name="TitleUI" type="CanvasLayer" parent="." unique_id=678481208]
+layer = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TitleUI" unique_id=1742449344]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -67.0
+offset_right = 160.0
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Resume" type="Label" parent="TitleUI/VBoxContainer" unique_id=636212982]
+texture_filter = 3
+material = SubResource("ShaderMaterial_hafda")
+layout_mode = 2
+mouse_filter = 0
+text = "> retomar"
+label_settings = SubResource("LabelSettings_05l2w")
+script = ExtResource("2_73bk0")
+
+[node name="Return" type="Label" parent="TitleUI/VBoxContainer" unique_id=187101458]
+texture_filter = 3
+material = SubResource("ShaderMaterial_hafda")
+layout_mode = 2
+mouse_filter = 0
+text = "> voltar ao título"
+label_settings = SubResource("LabelSettings_05l2w")
+script = ExtResource("3_86pvl")
+
+[node name="PostProcessing" type="CanvasLayer" parent="." unique_id=1603341752]
+layer = 49
+
+[node name="ColorRect" type="ColorRect" parent="PostProcessing" unique_id=200495837]
+material = SubResource("ShaderMaterial_nrrw6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CRT" type="ColorRect" parent="PostProcessing" unique_id=942988064]
+material = SubResource("ShaderMaterial_ycf27")
+offset_left = -389.0
+offset_top = -117.0
+offset_right = 1361.0
+offset_bottom = 870.0
+mouse_filter = 2
+
+[connection signal="gui_input" from="TitleUI/VBoxContainer/Resume" to="TitleUI/VBoxContainer/Resume" method="_on_gui_input"]
+[connection signal="gui_input" from="TitleUI/VBoxContainer/Return" to="TitleUI/VBoxContainer/Return" method="_on_gui_input"]

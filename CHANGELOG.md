@@ -1,7 +1,8 @@
-# v0.0.3
-- Added a weapon (Hyperlaser Gun)
-- Added shooting (LMB)
-- Enemies can now die
-- Added camera bobbing during movement
-- Added a new enemy (Generic malware)
-- Removed pepsiman (NOOOOOOOO!!!)
+# v0.0.4
+- Added a splash screen
+- Added a title screen (Play, credits and exit buttons)
+- Added a credits menu
+- Added a proper pause menu
+- Removed version indicator from the main game
+- Organized source code
+- Splash screen is now the default scene
