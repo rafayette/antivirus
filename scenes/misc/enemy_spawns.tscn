@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://dunmk26c8uiw6"]
+
+[ext_resource type="Script" uid="uid://cddqmk16x35om" path="res://scripts/enemy_spawns.gd" id="1_e1yvm"]
+[ext_resource type="PackedScene" uid="uid://dowdmdiarvy3o" path="res://scenes/enemies/malware.tscn" id="2_qpjbo"]
+
+[node name="EnemySpawns" type="Node" unique_id=1498578085]
+script = ExtResource("1_e1yvm")
+enemy_scene = ExtResource("2_qpjbo")
+max_enemies = 30
+
+[node name="Spawn" type="Marker3D" parent="." unique_id=395242789]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.455, 2.5288546)
+
+[node name="Spawn2" type="Marker3D" parent="." unique_id=1145666563]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.455, 20.018698)
+
+[node name="Spawn3" type="Marker3D" parent="." unique_id=1270092391]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.455, -12.210083)
+
+[node name="Spawn4" type="Marker3D" parent="." unique_id=996621655]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.455, -23.083324)
+
+[node name="Spawn5" type="Marker3D" parent="." unique_id=267492648]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.265259, 1.455, -23.083324)
+
+[node name="Spawn6" type="Marker3D" parent="." unique_id=1540605758]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.265259, 1.455, -11.005207)
+
+[node name="Spawn7" type="Marker3D" parent="." unique_id=188025812]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.195234, 1.455, -11.005207)
+
+[node name="Spawn8" type="Marker3D" parent="." unique_id=1635024942]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.195234, 1.455, 15.165621)
+
+[node name="Spawn9" type="Marker3D" parent="." unique_id=343247774]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.768227, 1.455, -23.624123)
+
+[node name="Timer" type="Timer" parent="." unique_id=1797884097]

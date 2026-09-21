@@ -1,47 +1,16 @@
 [gd_scene format=3 uid="uid://ba4fmkua476u4"]
 
-[ext_resource type="Shader" uid="uid://ecm8lygcuo1b" path="res://shaders/Retro2D.gdshader" id="1_6iypd"]
-[ext_resource type="FontFile" uid="uid://dv26nq0jui80h" path="res://assets/fonts/brokenconsole.ttf" id="1_jka67"]
+[ext_resource type="PackedScene" uid="uid://l0t8fvghaj8c" path="res://scenes/misc/post_processing.tscn" id="1_excbq"]
 [ext_resource type="MeshLibrary" uid="uid://cdhy2ufet1rm5" path="res://assets/meshes/circuit.meshlib" id="1_noarx"]
 [ext_resource type="Texture2D" uid="uid://c2qpwi1433y5c" path="res://assets/textures/sky.png" id="2_wc5p8"]
-[ext_resource type="Script" uid="uid://b0pmqpfvyvxx1" path="res://scripts/character_body_3d.gd" id="3_a0tk4"]
 [ext_resource type="Script" uid="uid://curnnfrqxcvv" path="res://scripts/grid_map.gd" id="3_i5arm"]
 [ext_resource type="Texture2D" uid="uid://cx4nsty8fx1mn" path="res://assets/textures/floor.png" id="5_nu31w"]
-[ext_resource type="Shader" uid="uid://dlbhvve08hx8l" path="res://shaders/Overlay.gdshader" id="7_4arys"]
-[ext_resource type="Script" uid="uid://dyyviawd5b1lj" path="res://scripts/weapon.gd" id="7_s0gvp"]
-[ext_resource type="AudioStream" uid="uid://c6bayqghmj4f6" path="res://assets/sfx/shoot.wav" id="9_2yde8"]
-[ext_resource type="Script" uid="uid://cxlouostxyqyn" path="res://scripts/retry.gd" id="11_tereu"]
-[ext_resource type="Texture2D" uid="uid://q55sf243khn0" path="res://assets/ui/StatusBar.png" id="12_3v7ru"]
-[ext_resource type="AudioStream" uid="uid://d2opd13uybi67" path="res://assets/sfx/overheatWarning.wav" id="12_cdqbm"]
-[ext_resource type="Shader" uid="uid://b4iyw00rhe8jn" path="res://shaders/ui_tint.gdshader" id="13_jsnrv"]
-[ext_resource type="FontFile" uid="uid://pnbphiys52ma" path="res://assets/fonts/TerminusTTF-Bold-4.49.3.ttf" id="13_tcnuu"]
-[ext_resource type="AudioStream" uid="uid://beqappb4eym33" path="res://assets/sfx/gameOver.wav" id="14_3v7ru"]
-[ext_resource type="Shader" uid="uid://cygbnxcrj3fae" path="res://shaders/status_grid.gdshader" id="15_lggff"]
-[ext_resource type="Texture2D" uid="uid://dq6irviw3lls5" path="res://assets/ui/StatusBarBackground.png" id="16_s0gvp"]
-[ext_resource type="Texture2D" uid="uid://bdmq7mc3s8os4" path="res://assets/ui/StatusBarProgress.png" id="18_lggff"]
-[ext_resource type="Shader" uid="uid://bd0cx6f7qpdpg" path="res://shaders/plrweaponhold.gdshader" id="20_dhlwf"]
-[ext_resource type="Texture2D" uid="uid://0vovxylsogj8" path="res://assets/weapon/weaponhold.png" id="21_5t8nk"]
-[ext_resource type="Script" uid="uid://8atu2v342wha" path="res://scripts/weapon_bob.gd" id="22_5t8nk"]
-[ext_resource type="Texture2D" uid="uid://1xam1wt2ufce" path="res://assets/weapon/weaponshoot1.png" id="22_nu31w"]
-[ext_resource type="Texture2D" uid="uid://cyg76d663qdon" path="res://assets/weapon/weaponshoot2.png" id="23_obt1j"]
-[ext_resource type="PackedScene" uid="uid://dowdmdiarvy3o" path="res://scenes/enemies/malware.tscn" id="27_nu31w"]
-[ext_resource type="Script" uid="uid://cddqmk16x35om" path="res://scripts/enemy_spawns.gd" id="27_obt1j"]
+[ext_resource type="PackedScene" uid="uid://it8rc8h7w7gc" path="res://scenes/misc/player.tscn" id="6_iav0o"]
+[ext_resource type="PackedScene" uid="uid://dmctvcefnnv0m" path="res://scenes/misc/hud.tscn" id="7_dnkej"]
+[ext_resource type="PackedScene" uid="uid://dkovgtwe6a7cc" path="res://scenes/misc/game_over.tscn" id="8_mm8aj"]
+[ext_resource type="PackedScene" uid="uid://dwgqo1xjx7dv2" path="res://scenes/misc/sound_effects.tscn" id="9_wtwp4"]
+[ext_resource type="PackedScene" uid="uid://dunmk26c8uiw6" path="res://scenes/misc/enemy_spawns.tscn" id="10_iwr0g"]
 [ext_resource type="PackedScene" uid="uid://cno6k21ggiydk" path="res://scenes/misc/pause.tscn" id="28_x7jkp"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_cdqbm"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tereu"]
-noise = SubResource("FastNoiseLite_cdqbm")
-seamless = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cjccb"]
-shader = ExtResource("1_6iypd")
-shader_parameter/pixel_size = 2.0
-shader_parameter/levels = 50.0
-shader_parameter/gamma = Vector2(0.9, 0.9)
-shader_parameter/temperature = 40.0
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_tereu")
-shader_parameter/haze_strength = 0.022000001045
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jw77y"]
 panorama = ExtResource("2_wc5p8")
@@ -64,123 +33,9 @@ albedo_texture = ExtResource("5_nu31w")
 uv1_scale = Vector3(5, 5, 5)
 uv1_triplanar = true
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8ibgg"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nrrw6"]
-render_priority = 0
-shader = ExtResource("7_4arys")
-shader_parameter/pixel_size = 2.0
-shader_parameter/levels = 83.0
-shader_parameter/gamma = Vector2(1, 1)
-
-[sub_resource type="QuadMesh" id="QuadMesh_cjccb"]
-material = SubResource("ShaderMaterial_nrrw6")
-flip_faces = true
-size = Vector2(2, 2)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_cjccb"]
-size = Vector3(1.765625, 1.1466064, 1.3076172)
-
-[sub_resource type="LabelSettings" id="LabelSettings_cjccb"]
-font = ExtResource("1_jka67")
-font_size = 38
-outline_size = 3
-outline_color = Color(0.8288101, 2.7193873e-06, 5.7756904e-07, 1)
-shadow_size = 5
-shadow_color = Color(0, 0, 0, 0.24705882)
-shadow_offset = Vector2(0, 0)
-
-[sub_resource type="LabelSettings" id="LabelSettings_6iypd"]
-font = ExtResource("1_jka67")
-font_size = 64
-font_color = Color(0.9999934, 0.9356878, 0.92463845, 1)
-outline_size = 8
-outline_color = Color(1, 0.3647059, 0, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tuemg"]
-shader = ExtResource("13_jsnrv")
-shader_parameter/hot_color = Color(1, 0.15, 0.15, 1)
-shader_parameter/heat_shift = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_i0g27"]
-shader = ExtResource("15_lggff")
-shader_parameter/hot_color = Color(1, 0.15, 0.15, 1)
-shader_parameter/heat_shift = 0.0
-shader_parameter/scroll_speed = Vector2(0.1, 0)
-
-[sub_resource type="LabelSettings" id="LabelSettings_plmsw"]
-font = ExtResource("13_tcnuu")
-font_size = 28
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_eoijo"]
-shader = ExtResource("20_dhlwf")
-shader_parameter/pixel_size = 8
-shader_parameter/color_levels = 10
-shader_parameter/hot_color = Color(1, 0.15, 0.15, 1)
-shader_parameter/heat_shift = 0.0
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_cjccb"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("21_5t8nk")
-}],
-"loop": 1,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("21_5t8nk")
-}, {
-"duration": 1.0,
-"texture": ExtResource("22_nu31w")
-}, {
-"duration": 1.0,
-"texture": ExtResource("23_obt1j")
-}, {
-"duration": 1.0,
-"texture": ExtResource("22_nu31w")
-}, {
-"duration": 1.0,
-"texture": ExtResource("21_5t8nk")
-}],
-"loop": 0,
-"name": &"shoot",
-"speed": 24.0
-}]
-
-[sub_resource type="LabelSettings" id="LabelSettings_8ibgg"]
-font = ExtResource("1_jka67")
-font_size = 80
-outline_size = 10
-outline_color = Color(0.8, 0, 0, 1)
-shadow_size = 0
-stacked_outline_count = 1
-stacked_outline_0/size = 16
-stacked_outline_0/color = Color(0.5254902, 0, 0, 0.58431375)
-
-[sub_resource type="LabelSettings" id="LabelSettings_uknyc"]
-font = ExtResource("1_jka67")
-font_size = 64
-outline_size = 9
-outline_color = Color(0, 0.5803922, 0, 1)
-stacked_outline_count = 1
-stacked_outline_0/size = 9
-stacked_outline_0/color = Color(0, 0.4, 0, 0.654902)
-
 [node name="Main" type="Node3D" unique_id=303821375]
 
-[node name="PostProcessing" type="CanvasLayer" parent="." unique_id=1573296765]
-
-[node name="ColorRect" type="ColorRect" parent="PostProcessing" unique_id=1167429740]
-material = SubResource("ShaderMaterial_cjccb")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+[node name="PostProcessing" parent="." unique_id=1485310485 instance=ExtResource("1_excbq")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1474852218]
 environment = SubResource("Environment_cjccb")
@@ -203,214 +58,15 @@ material = SubResource("StandardMaterial3D_w2vr6")
 visible = false
 size = Vector3(1, 2, 1)
 
-[node name="Player" type="CharacterBody3D" parent="." unique_id=388313152 groups=["player"]]
+[node name="Player" parent="." unique_id=1363583805 instance=ExtResource("6_iav0o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3888321, 27.398506)
-script = ExtResource("3_a0tk4")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=140714253]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_8ibgg")
+[node name="UI" parent="." unique_id=1377319999 instance=ExtResource("7_dnkej")]
 
-[node name="Camera3D" type="Camera3D" parent="Player" unique_id=45565963]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5329039, 0)
-current = true
-script = ExtResource("7_s0gvp")
+[node name="GameOver" parent="." unique_id=1410762185 instance=ExtResource("8_mm8aj")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/Camera3D" unique_id=1934370372]
-visible = false
-extra_cull_margin = 16384.0
-mesh = SubResource("QuadMesh_cjccb")
+[node name="SoundEffects" parent="." unique_id=1326050402 instance=ExtResource("9_wtwp4")]
 
-[node name="ShootSFX" type="AudioStreamPlayer3D" parent="Player/Camera3D" unique_id=687996933]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5329039, 0)
-stream = ExtResource("9_2yde8")
-volume_db = -30.0
-
-[node name="DamageCheck" type="Area3D" parent="Player" unique_id=1318829021]
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/DamageCheck" unique_id=1606669989]
-shape = SubResource("BoxShape3D_cjccb")
-
-[node name="UI" type="CanvasLayer" parent="." unique_id=1150687724]
-layer = 10
-follow_viewport_enabled = true
-
-[node name="Temperature" type="Label" parent="UI" unique_id=1135320342]
-visible = false
-offset_left = 5.0
-offset_top = 7.0
-offset_right = 205.0
-offset_bottom = 97.0
-text = "70*c"
-label_settings = SubResource("LabelSettings_cjccb")
-
-[node name="OverheatWarning" type="Label" parent="UI" unique_id=1899725596]
-modulate = Color(1, 1, 1, 0)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -45.0
-offset_right = 100.0
-offset_bottom = 45.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "! OVERHEATING !"
-label_settings = SubResource("LabelSettings_6iypd")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StatusBar" type="TextureRect" parent="UI" unique_id=112047570]
-z_index = 1
-texture_filter = 1
-material = SubResource("ShaderMaterial_tuemg")
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -576.0
-offset_top = -108.0
-offset_right = 576.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("12_3v7ru")
-
-[node name="StatusBarBackground" type="TextureRect" parent="UI" unique_id=1760267629]
-texture_filter = 1
-texture_repeat = 2
-material = SubResource("ShaderMaterial_i0g27")
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -576.0
-offset_top = -108.0
-offset_right = 576.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("16_s0gvp")
-
-[node name="TempPercentage" type="Label" parent="UI" unique_id=1614676594]
-visible = false
-offset_left = 578.0
-offset_top = 547.0
-offset_right = 679.0
-offset_bottom = 624.0
-text = "0%"
-label_settings = SubResource("LabelSettings_plmsw")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TemperatureProgressBar" type="TextureProgressBar" parent="UI" unique_id=276146490]
-z_index = 2
-offset_left = 622.0
-offset_top = 547.0
-offset_right = 636.0
-offset_bottom = 648.0
-fill_mode = 3
-texture_progress = ExtResource("18_lggff")
-
-[node name="Weapon" type="AnimatedSprite2D" parent="UI" unique_id=679028227]
-z_index = -1
-material = SubResource("ShaderMaterial_eoijo")
-position = Vector2(576, 336.99997)
-scale = Vector2(0.28, 0.28)
-sprite_frames = SubResource("SpriteFrames_cjccb")
-animation = &"shoot"
-frame = 4
-frame_progress = 1.0
-offset = Vector2(0, 462)
-script = ExtResource("22_5t8nk")
-
-[node name="GameOver" type="CanvasLayer" parent="." unique_id=753342005]
-visible = false
-
-[node name="Label" type="Label" parent="GameOver" unique_id=1312157014]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "GAME OVER!"
-label_settings = SubResource("LabelSettings_8ibgg")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Retry" type="Label" parent="GameOver" unique_id=163035002]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -249.0
-offset_top = 51.0
-offset_right = 249.0
-offset_bottom = 131.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 0
-text = "retry"
-label_settings = SubResource("LabelSettings_uknyc")
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("11_tereu")
-
-[node name="SoundEffects" type="Node" parent="." unique_id=2082830993]
-
-[node name="OverheatAlert" type="AudioStreamPlayer" parent="SoundEffects" unique_id=1536873248]
-stream = ExtResource("12_cdqbm")
-
-[node name="GameOver" type="AudioStreamPlayer" parent="SoundEffects" unique_id=400831443]
-process_mode = 3
-stream = ExtResource("14_3v7ru")
-
-[node name="EnemySpawns" type="Node" parent="." unique_id=1553399188]
-script = ExtResource("27_obt1j")
-enemy_scene = ExtResource("27_nu31w")
-max_enemies = 30
-
-[node name="Spawn" type="Marker3D" parent="EnemySpawns" unique_id=2122157013]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.455, 2.5288546)
-
-[node name="Spawn2" type="Marker3D" parent="EnemySpawns" unique_id=1217552991]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.455, 20.018698)
-
-[node name="Spawn3" type="Marker3D" parent="EnemySpawns" unique_id=2103053913]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.455, -12.210083)
-
-[node name="Spawn4" type="Marker3D" parent="EnemySpawns" unique_id=30801705]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.455, -23.083324)
-
-[node name="Spawn5" type="Marker3D" parent="EnemySpawns" unique_id=1855149331]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.265259, 1.455, -23.083324)
-
-[node name="Spawn6" type="Marker3D" parent="EnemySpawns" unique_id=556556259]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.265259, 1.455, -11.005207)
-
-[node name="Spawn7" type="Marker3D" parent="EnemySpawns" unique_id=1114219074]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.195234, 1.455, -11.005207)
-
-[node name="Spawn8" type="Marker3D" parent="EnemySpawns" unique_id=815102933]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.195234, 1.455, 15.165621)
-
-[node name="Spawn9" type="Marker3D" parent="EnemySpawns" unique_id=661321101]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.768227, 1.455, -23.624123)
-
-[node name="Timer" type="Timer" parent="EnemySpawns" unique_id=309440069]
+[node name="EnemySpawns" parent="." unique_id=1498578085 instance=ExtResource("10_iwr0g")]
 
 [node name="PauseScreen" parent="." unique_id=1491325493 instance=ExtResource("28_x7jkp")]
-
-[connection signal="body_entered" from="Player/DamageCheck" to="Player" method="_on_damage_check_body_entered"]
-[connection signal="body_exited" from="Player/DamageCheck" to="Player" method="_on_damage_check_body_exited"]
-[connection signal="gui_input" from="GameOver/Retry" to="GameOver/Retry" method="_on_gui_input"]

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dwgqo1xjx7dv2"]
+
+[ext_resource type="AudioStream" uid="uid://d2opd13uybi67" path="res://assets/sfx/overheatWarning.wav" id="1_u3kru"]
+[ext_resource type="AudioStream" uid="uid://beqappb4eym33" path="res://assets/sfx/gameOver.wav" id="2_sk8qu"]
+
+[node name="SoundEffects" type="Node" unique_id=1326050402]
+
+[node name="OverheatAlert" type="AudioStreamPlayer" parent="." unique_id=896413286]
+stream = ExtResource("1_u3kru")
+
+[node name="GameOver" type="AudioStreamPlayer" parent="." unique_id=1873263240]
+process_mode = 3
+stream = ExtResource("2_sk8qu")

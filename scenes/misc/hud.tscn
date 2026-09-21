@@ -1,0 +1,188 @@
+[gd_scene format=3 uid="uid://dmctvcefnnv0m"]
+
+[ext_resource type="FontFile" uid="uid://dv26nq0jui80h" path="res://assets/fonts/brokenconsole.ttf" id="1_hk7ps"]
+[ext_resource type="Shader" uid="uid://b4iyw00rhe8jn" path="res://shaders/ui_tint.gdshader" id="2_kcdxx"]
+[ext_resource type="Texture2D" uid="uid://q55sf243khn0" path="res://assets/ui/StatusBar.png" id="3_c0caf"]
+[ext_resource type="Shader" uid="uid://cygbnxcrj3fae" path="res://shaders/status_grid.gdshader" id="4_k6vej"]
+[ext_resource type="Texture2D" uid="uid://dq6irviw3lls5" path="res://assets/ui/StatusBarBackground.png" id="5_seugt"]
+[ext_resource type="FontFile" uid="uid://pnbphiys52ma" path="res://assets/fonts/TerminusTTF-Bold-4.49.3.ttf" id="6_in18q"]
+[ext_resource type="Texture2D" uid="uid://bdmq7mc3s8os4" path="res://assets/ui/StatusBarProgress.png" id="7_vks3w"]
+[ext_resource type="Shader" uid="uid://bd0cx6f7qpdpg" path="res://shaders/plrweaponhold.gdshader" id="8_asrsd"]
+[ext_resource type="Texture2D" uid="uid://bkvqt5yqh1m13" path="res://assets/ui/RamProgress.png" id="8_kcdxx"]
+[ext_resource type="Texture2D" uid="uid://0vovxylsogj8" path="res://assets/weapon/weaponhold.png" id="9_ocljk"]
+[ext_resource type="Texture2D" uid="uid://1xam1wt2ufce" path="res://assets/weapon/weaponshoot1.png" id="10_gpuba"]
+[ext_resource type="Texture2D" uid="uid://cyg76d663qdon" path="res://assets/weapon/weaponshoot2.png" id="11_63pyk"]
+[ext_resource type="Script" uid="uid://8atu2v342wha" path="res://scripts/weapon_bob.gd" id="12_3qs63"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cjccb"]
+font = ExtResource("1_hk7ps")
+font_size = 38
+outline_size = 3
+outline_color = Color(0.8288101, 2.7193873e-06, 5.7756904e-07, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 0.24705882)
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6iypd"]
+font = ExtResource("1_hk7ps")
+font_size = 64
+font_color = Color(0.9999934, 0.9356878, 0.92463845, 1)
+outline_size = 8
+outline_color = Color(1, 0.3647059, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tuemg"]
+shader = ExtResource("2_kcdxx")
+shader_parameter/hot_color = Color(1, 0.15, 0.15, 1)
+shader_parameter/heat_shift = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i0g27"]
+shader = ExtResource("4_k6vej")
+shader_parameter/hot_color = Color(1, 0.15, 0.15, 1)
+shader_parameter/heat_shift = 0.0
+shader_parameter/scroll_speed = Vector2(0.1, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_plmsw"]
+font = ExtResource("6_in18q")
+font_size = 28
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eoijo"]
+shader = ExtResource("8_asrsd")
+shader_parameter/pixel_size = 8
+shader_parameter/color_levels = 10
+shader_parameter/hot_color = Color(1, 0.15, 0.15, 1)
+shader_parameter/heat_shift = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cjccb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_ocljk")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_ocljk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_gpuba")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_63pyk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_gpuba")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ocljk")
+}],
+"loop": 0,
+"name": &"shoot",
+"speed": 24.0
+}]
+
+[node name="UI" type="CanvasLayer" unique_id=1377319999]
+layer = 10
+follow_viewport_enabled = true
+
+[node name="Temperature" type="Label" parent="." unique_id=980037753]
+visible = false
+offset_left = 5.0
+offset_top = 7.0
+offset_right = 205.0
+offset_bottom = 97.0
+text = "70*c"
+label_settings = SubResource("LabelSettings_cjccb")
+
+[node name="OverheatWarning" type="Label" parent="." unique_id=722048059]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -45.0
+offset_right = 100.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "! OVERHEATING !"
+label_settings = SubResource("LabelSettings_6iypd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatusBar" type="TextureRect" parent="." unique_id=931038829]
+z_index = 1
+texture_filter = 1
+material = SubResource("ShaderMaterial_tuemg")
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -108.0
+offset_right = 576.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("3_c0caf")
+
+[node name="StatusBarBackground" type="TextureRect" parent="." unique_id=72611171]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_i0g27")
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -108.0
+offset_right = 576.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("5_seugt")
+
+[node name="TempPercentage" type="Label" parent="." unique_id=970962456]
+visible = false
+offset_left = 578.0
+offset_top = 547.0
+offset_right = 679.0
+offset_bottom = 624.0
+text = "0%"
+label_settings = SubResource("LabelSettings_plmsw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TemperatureProgressBar" type="TextureProgressBar" parent="." unique_id=1494247374]
+z_index = 2
+offset_left = 631.0
+offset_top = 547.0
+offset_right = 645.0
+offset_bottom = 648.0
+fill_mode = 3
+texture_progress = ExtResource("7_vks3w")
+
+[node name="RamProgressBar" type="TextureProgressBar" parent="." unique_id=1819148749]
+z_index = 2
+offset_left = 508.0
+offset_top = 547.0
+offset_right = 522.0
+offset_bottom = 648.0
+fill_mode = 3
+texture_progress = ExtResource("8_kcdxx")
+
+[node name="Weapon" type="AnimatedSprite2D" parent="." unique_id=930498193]
+z_index = -1
+material = SubResource("ShaderMaterial_eoijo")
+position = Vector2(576, 336.99997)
+scale = Vector2(0.28, 0.28)
+sprite_frames = SubResource("SpriteFrames_cjccb")
+animation = &"shoot"
+frame = 4
+frame_progress = 1.0
+offset = Vector2(0, 462)
+script = ExtResource("12_3qs63")

@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://it8rc8h7w7gc"]
+
+[ext_resource type="Script" uid="uid://b0pmqpfvyvxx1" path="res://scripts/character_body_3d.gd" id="1_tih7l"]
+[ext_resource type="Script" uid="uid://dyyviawd5b1lj" path="res://scripts/weapon.gd" id="2_p4448"]
+[ext_resource type="Shader" uid="uid://dlbhvve08hx8l" path="res://shaders/Overlay.gdshader" id="3_rv34q"]
+[ext_resource type="AudioStream" uid="uid://c6bayqghmj4f6" path="res://assets/sfx/shoot.wav" id="4_fnip1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8ibgg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nrrw6"]
+render_priority = 0
+shader = ExtResource("3_rv34q")
+shader_parameter/pixel_size = 2.0
+shader_parameter/levels = 83.0
+shader_parameter/gamma = Vector2(1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_cjccb"]
+material = SubResource("ShaderMaterial_nrrw6")
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cjccb"]
+size = Vector3(1.765625, 1.1466064, 1.3076172)
+
+[node name="Player" type="CharacterBody3D" unique_id=1363583805 groups=["player"]]
+script = ExtResource("1_tih7l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1048148657]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_8ibgg")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=182223620]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5329039, 0)
+current = true
+script = ExtResource("2_p4448")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D" unique_id=269650960]
+visible = false
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_cjccb")
+
+[node name="ShootSFX" type="AudioStreamPlayer3D" parent="Camera3D" unique_id=999236252]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5329039, 0)
+stream = ExtResource("4_fnip1")
+volume_db = -30.0
+
+[node name="DamageCheck" type="Area3D" parent="." unique_id=268208844]
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DamageCheck" unique_id=2109677671]
+shape = SubResource("BoxShape3D_cjccb")
+
+[connection signal="body_entered" from="DamageCheck" to="." method="_on_damage_check_body_entered"]
+[connection signal="body_exited" from="DamageCheck" to="." method="_on_damage_check_body_exited"]

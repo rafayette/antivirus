@@ -1,17 +1,20 @@
 extends CharacterBody3D
 
-const SPEED = 7.0
+var SPEED := 7.0
 const ACCEL = 3.0
 const FRICTION = 1.8
 var temperaturePerTick = 0
 var timer = 0.0
+var over_clocking = false
 
 @export var temperature = 40.0
+@export var ram = 100.0
 @onready var damageCheck = $DamageCheck
 @onready var statusBar: ShaderMaterial = $"../UI/StatusBar".material
 @onready var statusBarBackground: ShaderMaterial = $"../UI/StatusBarBackground".material
 @onready var weapon_sprite: ShaderMaterial = $"../UI/Weapon".material
 @onready var temperatureBar = $"../UI/TemperatureProgressBar"
+@onready var ramBar = $"../UI/RamProgressBar"
 @onready var overheatLabel = $"../UI/OverheatWarning"
 @onready var shaderRect = $"../PostProcessing/ColorRect"
 @onready var camera = $Camera3D
@@ -40,6 +43,16 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 
+func toggle_overclock(toggle: bool) -> void:
+	if toggle == true:
+		over_clocking = true
+		SPEED = 10.0
+		temperaturePerTick += 0.2
+	else:
+		over_clocking = false
+		SPEED = 7.0
+		temperaturePerTick -= 0.2
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("look_back"):
 		camera.rotation.y += PI
@@ -50,6 +63,10 @@ func _input(event: InputEvent) -> void:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		elif DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	if event.is_action_pressed("overclock") and not over_clocking:
+		toggle_overclock(true)
+	elif event.is_action_released("overclock") and over_clocking:
+		toggle_overclock(false)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -58,7 +75,9 @@ func _unhandled_input(event: InputEvent) -> void:
 func _process(delta: float):
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forwards", "move_backwards")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	
+	if ram <= 100.0 and not over_clocking:
+		ram = min(100.0, ram + (delta * 10))
+	ramBar.value = ram
 	var increase = temperaturePerTick * delta * 60
 	temperature = min(temperature + increase, 140.0)
 	if is_zero_approx(increase):

@@ -40,6 +40,11 @@ func _spawn_laser_visual(from: Vector3, to: Vector3) -> void:
 	tween.tween_callback(laser.queue_free)
 
 func fire() -> void:
+	if weapon_sprite.is_playing():
+		return
+	if player.ram < 15.0:
+		return
+	player.ram -= 15.0
 	weapon_sprite.play("shoot")
 	$ShootSFX.play()
 	var space_state := get_world_3d().direct_space_state
