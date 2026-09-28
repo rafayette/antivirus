@@ -10,6 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://dkovgtwe6a7cc" path="res://scenes/misc/game_over.tscn" id="8_mm8aj"]
 [ext_resource type="PackedScene" uid="uid://dwgqo1xjx7dv2" path="res://scenes/misc/sound_effects.tscn" id="9_wtwp4"]
 [ext_resource type="PackedScene" uid="uid://dunmk26c8uiw6" path="res://scenes/misc/enemy_spawns.tscn" id="10_iwr0g"]
+[ext_resource type="PackedScene" uid="uid://dowdmdiarvy3o" path="res://scenes/enemies/malware.tscn" id="11_dnkej"]
+[ext_resource type="PackedScene" uid="uid://df80n2rllkr8c" path="res://scenes/enemies/adware.tscn" id="12_iav0o"]
+[ext_resource type="PackedScene" uid="uid://ck7p3ssbcmo5h" path="res://scenes/enemies/item.tscn" id="14_mm8aj"]
 [ext_resource type="PackedScene" uid="uid://cno6k21ggiydk" path="res://scenes/misc/pause.tscn" id="28_x7jkp"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jw77y"]
@@ -65,8 +68,92 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3888321, 27.398506)
 
 [node name="GameOver" parent="." unique_id=1410762185 instance=ExtResource("8_mm8aj")]
 
+[node name="Popups" type="CanvasLayer" parent="." unique_id=701176329 groups=["popup_ui"]]
+
 [node name="SoundEffects" parent="." unique_id=1326050402 instance=ExtResource("9_wtwp4")]
 
-[node name="EnemySpawns" parent="." unique_id=1498578085 instance=ExtResource("10_iwr0g")]
+[node name="MalwareSpawns" parent="." unique_id=1498578085 node_paths=PackedStringArray("spawn_points") instance=ExtResource("10_iwr0g")]
+enemy_scene = ExtResource("11_dnkej")
+spawn_points = [NodePath("Spawn"), NodePath("Spawn2"), NodePath("Spawn3"), NodePath("Spawn4"), NodePath("Spawn5"), NodePath("Spawn6"), NodePath("Spawn7"), NodePath("Spawn8"), NodePath("Spawn9")]
+
+[node name="Spawn" type="Marker3D" parent="MalwareSpawns" unique_id=1337778045]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.455, 2.5288546)
+
+[node name="Spawn2" type="Marker3D" parent="MalwareSpawns" unique_id=667053590]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.455, 20.018698)
+
+[node name="Spawn3" type="Marker3D" parent="MalwareSpawns" unique_id=1555077785]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.455, -12.210083)
+
+[node name="Spawn4" type="Marker3D" parent="MalwareSpawns" unique_id=477582474]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.455, -23.083324)
+
+[node name="Spawn5" type="Marker3D" parent="MalwareSpawns" unique_id=1600794253]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.265259, 1.455, -23.083324)
+
+[node name="Spawn6" type="Marker3D" parent="MalwareSpawns" unique_id=1407535106]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.265259, 1.455, -11.005207)
+
+[node name="Spawn7" type="Marker3D" parent="MalwareSpawns" unique_id=515697789]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.195234, 1.455, -11.005207)
+
+[node name="Spawn8" type="Marker3D" parent="MalwareSpawns" unique_id=2054389925]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.195234, 1.455, 15.165621)
+
+[node name="Spawn9" type="Marker3D" parent="MalwareSpawns" unique_id=795055603]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.768227, 1.455, -23.624123)
+
+[node name="AdwareSpawns" parent="." unique_id=1535756121 node_paths=PackedStringArray("spawn_points") instance=ExtResource("10_iwr0g")]
+enemy_scene = ExtResource("12_iav0o")
+max_enemies = 5
+spawn_points = [NodePath("Spawn"), NodePath("Spawn2"), NodePath("Spawn3"), NodePath("Spawn4"), NodePath("Spawn5"), NodePath("Spawn6"), NodePath("Spawn7"), NodePath("Spawn8"), NodePath("Spawn9")]
+
+[node name="Spawn" type="Marker3D" parent="AdwareSpawns" unique_id=2073988880]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.455, 2.5288546)
+
+[node name="Spawn2" type="Marker3D" parent="AdwareSpawns" unique_id=54821134]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.455, 20.018698)
+
+[node name="Spawn3" type="Marker3D" parent="AdwareSpawns" unique_id=1121907772]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.455, -12.210083)
+
+[node name="Spawn4" type="Marker3D" parent="AdwareSpawns" unique_id=764388807]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.455, -23.083324)
+
+[node name="Spawn5" type="Marker3D" parent="AdwareSpawns" unique_id=2082176309]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.265259, 1.455, -23.083324)
+
+[node name="Spawn6" type="Marker3D" parent="AdwareSpawns" unique_id=1893994799]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.265259, 1.455, -11.005207)
+
+[node name="Spawn7" type="Marker3D" parent="AdwareSpawns" unique_id=1808473703]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.195234, 1.455, -11.005207)
+
+[node name="Spawn8" type="Marker3D" parent="AdwareSpawns" unique_id=396609371]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.195234, 1.455, 15.165621)
+
+[node name="Spawn9" type="Marker3D" parent="AdwareSpawns" unique_id=135468927]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.768227, 1.455, -23.624123)
+
+[node name="ItemSpawns" parent="." unique_id=272776584 node_paths=PackedStringArray("spawn_points") instance=ExtResource("10_iwr0g")]
+enemy_scene = ExtResource("14_mm8aj")
+max_enemies = 5
+spawn_points = [NodePath("Spawn"), NodePath("Spawn2"), NodePath("Spawn3"), NodePath("Spawn4"), NodePath("Spawn5")]
+is_item = true
+
+[node name="Spawn" type="Marker3D" parent="ItemSpawns" unique_id=1515316325]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.823, 7.166341)
+
+[node name="Spawn2" type="Marker3D" parent="ItemSpawns" unique_id=2043344302]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.831145, 0.823, 4.9392967)
+
+[node name="Spawn3" type="Marker3D" parent="ItemSpawns" unique_id=2062576603]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.85094, 0.823, -23.00988)
+
+[node name="Spawn4" type="Marker3D" parent="ItemSpawns" unique_id=2096041259]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.206497, 0.823, -24.081705)
+
+[node name="Spawn5" type="Marker3D" parent="ItemSpawns" unique_id=689875936]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.04415, 0.823, 3.6807613)
 
 [node name="PauseScreen" parent="." unique_id=1491325493 instance=ExtResource("28_x7jkp")]

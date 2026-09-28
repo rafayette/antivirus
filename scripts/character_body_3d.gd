@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name Player
 
 var SPEED := 7.0
 const ACCEL = 3.0
@@ -14,6 +15,7 @@ var over_clocking = false
 @onready var statusBarBackground: ShaderMaterial = $"../UI/StatusBarBackground".material
 @onready var weapon_sprite: ShaderMaterial = $"../UI/Weapon".material
 @onready var temperatureBar = $"../UI/TemperatureProgressBar"
+@onready var item_label: Label = $"../UI/ItemLabel"
 @onready var ramBar = $"../UI/RamProgressBar"
 @onready var overheatLabel = $"../UI/OverheatWarning"
 @onready var shaderRect = $"../PostProcessing/ColorRect"
@@ -21,6 +23,9 @@ var over_clocking = false
 
 @onready var overheatSfx = $"../SoundEffects/OverheatAlert"
 @onready var gameOverSfx = $"../SoundEffects/GameOver"
+@onready var scanSfx = $"../SoundEffects/Scan"
+@onready var itemPickupSfx = $"../SoundEffects/Item"
+@onready var bombSfx = $"../SoundEffects/Bomb"
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -67,6 +72,8 @@ func _input(event: InputEvent) -> void:
 		toggle_overclock(true)
 	elif event.is_action_released("overclock") and over_clocking:
 		toggle_overclock(false)
+	if event.is_action_pressed("scan"):
+		cast_scan_pulse(global_position)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -111,10 +118,69 @@ func _process(delta: float):
 		gameOverSfx.play()
 		get_tree().paused = true
 
+func item_picked_up(label, isBomb) -> void:
+	if isBomb:
+		bombSfx.play()
+	else:
+		itemPickupSfx.play()
+	item_label.text = label
+	item_label.modulate.a = 1
+	var tween := create_tween()
+	#tween.set_trans(Tween.TRANS_BACK)
+	#tween.set_parallel(true)
+	#tween.tween_property(self, "scale", Vector2(0.1, 0.1), 0.5)
+	tween.tween_property(item_label, "modulate:a", 0, 1)
+
 func _on_damage_check_body_entered(body: Node3D) -> void:
-	if body is Enemy:
+	if body is Item:
+		body.pick_up(self)
+	elif body is Enemy:
 		temperaturePerTick += body.temperature_per_tick
 
 func _on_damage_check_body_exited(body: Node3D) -> void:
 	if body is Enemy:
 		temperaturePerTick = maxf(0.0, temperaturePerTick - body.temperature_per_tick)
+
+var scanning = false
+func cast_scan_pulse(origin: Vector3, max_radius: float = 30.0, duration: float = 1.5) -> void:
+	if ram < 60.0 or scanning:
+		return
+	ram -= 60.0
+	scanning = true
+	scanSfx.play()
+	var plane := MeshInstance3D.new()
+	var mesh := PlaneMesh.new()
+	mesh.size = Vector2(200, 200)
+	plane.mesh = mesh
+	
+	var mat := ShaderMaterial.new()
+	mat.shader = load("res://shaders/scan.gdshader")
+	mat.set_shader_parameter("pulse_origin", origin)
+	mat.set_shader_parameter("band_width", 1.5)
+	plane.material_override = mat
+	
+	get_tree().current_scene.add_child(plane)
+	plane.global_position = Vector3(origin.x, origin.y - 0.9, origin.z)
+	
+	var already_tagged: Array = []
+	var current_radius: float = 0.0
+	
+	var tween := create_tween()
+	tween.set_parallel(true)
+	tween.tween_method(func(v):
+		current_radius = v
+		mat.set_shader_parameter("wave_radius", v)
+		_tag_enemies_in_radius(origin, current_radius, already_tagged)
+	, 0.0, max_radius, duration)
+	tween.tween_method(func(v): mat.set_shader_parameter("alpha_fade", v), 1.0, 0.0, duration)
+	tween.chain().tween_callback(plane.queue_free)
+	scanning = false
+
+func _tag_enemies_in_radius(origin: Vector3, radius: float, already_tagged: Array) -> void:
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		if enemy in already_tagged:
+			continue
+		if origin.distance_to(enemy.global_position) <= radius:
+			already_tagged.append(enemy)
+			if enemy.has_method("mark_as_scanned"):
+				enemy.mark_as_scanned()

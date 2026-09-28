@@ -1,6 +1,7 @@
 @tool
 extends AnimatedSprite3D
 
+@export var floats = true
 var dissolve_material: ShaderMaterial
 var wave_time = 0.0
 
@@ -42,6 +43,8 @@ func _update_shader_texture() -> void:
 	dissolve_material.set_shader_parameter("albedo_texture", current_texture)
 
 func _process(delta: float) -> void:
+	if not floats:
+		return
 	wave_time += delta
 	var wave = sin(wave_time * 2)
-	position.y = abs(wave * 0.5)
+	position.y = 0.35 + wave * 0.25

@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dbl6ey7aqe20f" path="res://scripts/pause_2.gd" id="1_73bk0"]
 [ext_resource type="FontFile" uid="uid://pnbphiys52ma" path="res://assets/fonts/TerminusTTF-Bold-4.49.3.ttf" id="1_313x3"]
-[ext_resource type="Script" uid="uid://cx1dfp73ypsys" path="res://resume.gd" id="2_73bk0"]
-[ext_resource type="Script" uid="uid://b42t7h4cl3ugv" path="res://return.gd" id="3_86pvl"]
+[ext_resource type="Script" uid="uid://cx1dfp73ypsys" path="res://scripts/resume.gd" id="2_73bk0"]
+[ext_resource type="Script" uid="uid://b42t7h4cl3ugv" path="res://scripts/return.gd" id="3_86pvl"]
 [ext_resource type="Shader" uid="uid://ecm8lygcuo1b" path="res://shaders/Retro2D.gdshader" id="4_6xax0"]
 [ext_resource type="Shader" uid="uid://8ietow42vev6" path="res://shaders/crt.gdshader" id="5_brp4s"]
 

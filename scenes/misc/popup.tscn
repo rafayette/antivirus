@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://vpblvmg0riti"]
+
+[ext_resource type="Texture2D" uid="uid://d3x4bc34cllo6" path="res://assets/enemies/adware/ad_1.png" id="1_dct5q"]
+[ext_resource type="Script" uid="uid://dwyy4cqfip3ng" path="res://scenes/misc/popup.gd" id="2_3wxr8"]
+[ext_resource type="Texture2D" uid="uid://byc7d7xnwd2au" path="res://assets/enemies/adware/ad_2.png" id="3_xyne8"]
+[ext_resource type="Texture2D" uid="uid://c40i3wmmjf6i5" path="res://assets/enemies/adware/ad_3.png" id="4_8iyyu"]
+[ext_resource type="Texture2D" uid="uid://c105g4j1pp8dw" path="res://assets/enemies/adware/ad_4.png" id="5_q1tln"]
+[ext_resource type="Texture2D" uid="uid://crnmnjmb7q5fc" path="res://assets/enemies/adware/ad_5.png" id="6_wgm2f"]
+[ext_resource type="Texture2D" uid="uid://c2sd8cbpmgdqy" path="res://assets/enemies/adware/ad_6.png" id="7_dmwh2"]
+
+[node name="Popup" type="TextureRect" unique_id=1983575468]
+z_index = 99
+texture_filter = 1
+offset_right = 69.0
+offset_bottom = 47.0
+texture = ExtResource("1_dct5q")
+script = ExtResource("2_3wxr8")
+variants = Array[Texture2D]([ExtResource("3_xyne8"), ExtResource("1_dct5q"), ExtResource("4_8iyyu"), ExtResource("5_q1tln"), ExtResource("6_wgm2f"), ExtResource("7_dmwh2")])

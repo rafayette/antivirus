@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://ck7p3ssbcmo5h"]
+
+[ext_resource type="Script" uid="uid://du1aa784ivetk" path="res://scenes/enemies/item.gd" id="1_mc2xi"]
+[ext_resource type="Shader" uid="uid://c7w7nfo4u448a" path="res://shaders/enemyfade.gdshader" id="2_ugh50"]
+[ext_resource type="Texture2D" uid="uid://bc0uuql0dy254" path="res://assets/items/zip.png" id="3_qllfw"]
+[ext_resource type="Shader" uid="uid://byu5usb6clx7t" path="res://scenes/enemies/enemy_highlight.gdshader" id="4_ugh50"]
+[ext_resource type="Script" uid="uid://b2j2aso0s55fd" path="res://scripts/enemy_sprite.gd" id="4_y1bjo"]
+[ext_resource type="AudioStream" uid="uid://c52fta4mnwv8y" path="res://assets/sfx/virusDie.wav" id="5_owcef"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cdqbm"]
+size = Vector3(2.6459045, 4.594406, 2.008789)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nrrw6"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_ugh50")
+shader_parameter/albedo_texture = ExtResource("3_qllfw")
+shader_parameter/dissolve_progress = 0.0
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/scanline_color = Color(0.2, 0.6, 1, 1)
+shader_parameter/scanline_width = 0.01
+shader_parameter/outline_thickness = 0.003
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kmlia"]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource("4_ugh50")
+shader_parameter/albedo_texture = ExtResource("3_qllfw")
+shader_parameter/highlight_color = Color(0.2, 0.6, 1, 1)
+shader_parameter/highlight_strength = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cjccb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_qllfw")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Item" type="CharacterBody3D" unique_id=578466623 groups=["enemy"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_mc2xi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=195285334]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.05164796, 1.4377625, 0)
+shape = SubResource("BoxShape3D_cdqbm")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=1104612094]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_nrrw6")
+material_overlay = SubResource("ShaderMaterial_kmlia")
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_cjccb")
+script = ExtResource("4_y1bjo")
+floats = null
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=841625462]
+target_position = Vector3(0, 0, 25)
+debug_shape_custom_color = Color(1, 0, 0, 1)
+debug_shape_thickness = 5
+
+[node name="DeathSFX" type="AudioStreamPlayer3D" parent="." unique_id=524179806]
+stream = ExtResource("5_owcef")
+volume_db = -10.0
