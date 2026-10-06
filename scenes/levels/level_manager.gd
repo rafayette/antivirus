@@ -15,9 +15,11 @@ func check_for_level_complete(death_position: Vector3) -> void:
 	var enemy_count: int = get_tree().get_nodes_in_group("enemy").size()
 	var item_count: int = get_tree().get_nodes_in_group("item").size()
 	var remaining: int = enemy_count - item_count
+	print("Enemy count: " + str(enemy_count) + "/Item count: " + str(item_count) + "Remaining: " + str(remaining))
 	if remaining > 0:
 		return
 	
+	print("Spawning key")
 	key_spawned = true
 	var key: Node3D = key_scene.instantiate()
 	get_tree().current_scene.add_child(key)

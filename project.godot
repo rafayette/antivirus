@@ -42,6 +42,7 @@ enemy=""
 popup_ui=""
 item=""
 level_manager=""
+keyhole=""
 
 [input]
 

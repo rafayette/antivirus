@@ -143,7 +143,7 @@ func _on_damage_check_body_exited(body: Node3D) -> void:
 		temperaturePerTick = maxf(0.0, temperaturePerTick - body.temperature_per_tick)
 
 var scanning = false
-func cast_scan_pulse(origin: Vector3, max_radius: float = 30.0, duration: float = 1.5) -> void:
+func cast_scan_pulse(origin: Vector3, max_radius: float = 60.0, duration: float = 2.5) -> void:
 	if ram < 60.0 or scanning:
 		return
 	ram -= 60.0

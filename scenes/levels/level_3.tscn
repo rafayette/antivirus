@@ -197,7 +197,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.04415, 0.823, 3.6807613)
 
 [node name="PauseScreen" parent="." unique_id=1491325493 instance=ExtResource("16_2qmps")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1957194854]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1957194854 groups=["keyhole"]]
 transform = Transform3D(-1.5381027, 1.3446521e-07, -5.8776603e-15, 0, -6.723259e-08, -1.5381027, -1.3446521e-07, -1.5381027, 6.723259e-08, -0.044628978, 1.9302998, 34.971066)
 mesh = SubResource("PlaneMesh_cjccb")
 

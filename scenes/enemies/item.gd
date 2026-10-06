@@ -11,6 +11,8 @@ func _ready() -> void:
 	#speed = 0.0
 	chases_player = false
 	add_to_group("item")
+	if item_type == ItemTypes.Bomb:
+		sprite.material_overlay.set_shader_parameter("highlight_color", Color.html("#ff0000"))
 
 func pick_up(player: Player) -> void:
 	match item_type:
