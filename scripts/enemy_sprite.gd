@@ -21,7 +21,7 @@ func _update_facing_sprite() -> void:
 	var angle: float = enemy_forward.signed_angle_to(to_camera, Vector3.UP)
 	var abs_angle_deg: float = abs(rad_to_deg(angle))
 	
-	flip_h = angle > 0.0  # flipped condition
+	flip_h = angle > 0.0
 	
 	if abs_angle_deg < 22.5:
 		animation = "forward"
@@ -36,7 +36,7 @@ func _ready() -> void:
 	dissolve_material = material_override
 	frame_changed.connect(_update_shader_texture)
 	animation_changed.connect(_update_shader_texture)
-	_update_shader_texture()  # set it once immediately for the starting frame
+	_update_shader_texture()
 
 func _update_shader_texture() -> void:
 	var current_texture: Texture2D = sprite_frames.get_frame_texture(animation, frame)

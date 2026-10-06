@@ -1,7 +1,7 @@
 extends Camera3D
 
 @onready var player: CharacterBody3D = get_tree().get_first_node_in_group("player")
-@export var damage: float = 25.0
+@export var damage: float = 1.0
 @export var shoot_range: float = 100.0
 @export var return_speed: float = 8.0
 @onready var camera: Camera3D = get_viewport().get_camera_3d()
@@ -33,7 +33,7 @@ func _spawn_laser_visual(from: Vector3, to: Vector3) -> void:
 	get_tree().current_scene.add_child(laser)
 	laser.global_position = from.lerp(to, 0.5)
 	laser.look_at(to, Vector3.UP)
-	laser.rotate_object_local(Vector3.RIGHT, PI / 2.0)  # cylinder default axis correction
+	laser.rotate_object_local(Vector3.RIGHT, PI / 2.0)
 	
 	var tween := create_tween()
 	tween.tween_property(laser, "scale", Vector3(0.1, 1.0, 0.1), 0.08)
@@ -48,7 +48,7 @@ func fire() -> void:
 	weapon_sprite.play("shoot")
 	$ShootSFX.play()
 	var space_state := get_world_3d().direct_space_state
-	var muzzle_offset: float = 0.3  # start the visual slightly ahead of the camera
+	var muzzle_offset: float = 0.3
 	var from: Vector3 = camera.global_position + camera.global_transform.basis.z * -muzzle_offset
 	var to: Vector3 = camera.global_position + camera.global_transform.basis.z * -shoot_range
 	

@@ -22,10 +22,15 @@ void fragment() {
     float final_alpha = tex_color.a;
     
     if (dissolving) {
-        float alpha_up = texture(albedo_texture, UV + vec2(0.0, outline_thickness)).a;
-        float alpha_down = texture(albedo_texture, UV - vec2(0.0, outline_thickness)).a;
-        float alpha_left = texture(albedo_texture, UV - vec2(outline_thickness, 0.0)).a;
-        float alpha_right = texture(albedo_texture, UV + vec2(outline_thickness, 0.0)).a;
+        vec2 uv_up = clamp(UV + vec2(0.0, outline_thickness), vec2(0.0), vec2(1.0));
+        vec2 uv_down = clamp(UV - vec2(0.0, outline_thickness), vec2(0.0), vec2(1.0));
+        vec2 uv_left = clamp(UV - vec2(outline_thickness, 0.0), vec2(0.0), vec2(1.0));
+        vec2 uv_right = clamp(UV + vec2(outline_thickness, 0.0), vec2(0.0), vec2(1.0));
+        
+        float alpha_up = texture(albedo_texture, uv_up).a;
+        float alpha_down = texture(albedo_texture, uv_down).a;
+        float alpha_left = texture(albedo_texture, uv_left).a;
+        float alpha_right = texture(albedo_texture, uv_right).a;
         bool is_edge = tex_color.a < 0.1 && (alpha_up + alpha_down + alpha_left + alpha_right) > 0.1;
         
         if (is_edge && dist_from_center > dissolve_progress) {

@@ -8,6 +8,7 @@ var temperaturePerTick = 0
 var timer = 0.0
 var over_clocking = false
 
+@export var has_key = false
 @export var temperature = 40.0
 @export var ram = 100.0
 @onready var damageCheck = $DamageCheck

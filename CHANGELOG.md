@@ -1,4 +1,5 @@
-# v0.0.6
-- Added a new enemy (Adware)
-- Added items (RAM, Cooling & ZIP bombs)
-- Added scanning (Q key)
+# v0.0.9
+- Added 2 new stages
+- Added keys
+- Added the boss
+- Added music to the second stage

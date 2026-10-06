@@ -1,7 +1,9 @@
 extends Node
 
+@export var enabled := true
 @export var enemy_scene: PackedScene
 @export var max_enemies: int = 10
+@export var total_enemies_to_spawn: int = 20
 @export var check_interval: float = 2.0
 @export var spawn_points: Array[Marker3D] = []
 @export var is_item = false
@@ -10,7 +12,17 @@ extends Node
 @onready var timer: Timer = $Timer
 @onready var camera: Camera3D = get_viewport().get_camera_3d()
 
+var total_spawned: int = 0
+
+func is_finished_spawning() -> bool:
+	if not enabled:
+		return true
+	
+	return total_enemies_to_spawn > 0 and total_spawned >= total_enemies_to_spawn
+
 func _ready() -> void:
+	if not enabled:
+		return
 	for child in get_children():
 		if child is Marker3D:
 			spawn_points.append(child)
@@ -19,6 +31,9 @@ func _ready() -> void:
 	timer.start()
 
 func _on_timer_timeout() -> void:
+	if total_enemies_to_spawn > 0 and total_spawned >= total_enemies_to_spawn:
+		return
+	
 	var current_enemy_count: int = get_tree().get_nodes_in_group("enemy").size() - get_tree().get_nodes_in_group("item").size()
 	if is_item == true:
 		current_enemy_count = get_tree().get_nodes_in_group("item").size()
@@ -33,12 +48,13 @@ func _spawn_enemy() -> void:
 		valid_points = valid_points.filter(_is_point_far_from_items)
 	
 	if valid_points.is_empty():
-		return  # no valid spawn points this cycle
+		return
 
 	var spawn_point: Marker3D = valid_points[randi() % valid_points.size()]
 	var enemy: Node3D = enemy_scene.instantiate()
 	get_tree().current_scene.add_child(enemy)
 	enemy.global_position = spawn_point.global_position
+	total_spawned += 1
 
 func _is_point_hidden(point: Node3D) -> bool:
 	if not camera:

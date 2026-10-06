@@ -4,6 +4,6 @@ extends Node
 @onready var post_processing = $PostProcessing
 @export var visible = false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	title_ui.visible = self.visible
 	post_processing.visible = self.visible

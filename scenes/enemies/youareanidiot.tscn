@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://dkelt6hil1v5g"]
+
+[ext_resource type="Script" uid="uid://pib14jk7bqc3" path="res://scenes/enemies/youareanidiot.gd" id="1_x1w8q"]
+[ext_resource type="PackedScene" uid="uid://cae12x6so1ok0" path="res://scenes/enemies/bossclone.tscn" id="2_gga3v"]
+[ext_resource type="Shader" uid="uid://c7w7nfo4u448a" path="res://shaders/enemyfade.gdshader" id="2_x1w8q"]
+[ext_resource type="Texture2D" uid="uid://dil8upk16h0rs" path="res://assets/enemies/youareanidiot/white.png" id="3_17px3"]
+[ext_resource type="Shader" uid="uid://byu5usb6clx7t" path="res://scenes/enemies/enemy_highlight.gdshader" id="4_17px3"]
+[ext_resource type="Script" uid="uid://b2j2aso0s55fd" path="res://scripts/enemy_sprite.gd" id="5_4gula"]
+[ext_resource type="Texture2D" uid="uid://do5magif6xubk" path="res://assets/enemies/youareanidiot/black.png" id="6_4gula"]
+[ext_resource type="AudioStream" uid="uid://c52fta4mnwv8y" path="res://assets/sfx/virusDie.wav" id="6_bg8be"]
+[ext_resource type="AudioStream" uid="uid://cka4lhagow1b4" path="res://assets/sfx/bossDamage.wav" id="9_17px3"]
+[ext_resource type="AudioStream" uid="uid://boy062he0c5ja" path="res://assets/sfx/bossClone.wav" id="10_bg8be"]
+[ext_resource type="AudioStream" uid="uid://bq1snb3cf7imh" path="res://assets/sfx/bossFinish.wav" id="11_e7px0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cdqbm"]
+size = Vector3(1.7773438, 2.0584717, 1.6982422)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2wc3h"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_x1w8q")
+shader_parameter/albedo_texture = ExtResource("3_17px3")
+shader_parameter/dissolve_progress = 0.0
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/scanline_color = Color(0, 0, 0, 1)
+shader_parameter/scanline_width = 0.020000000950000003
+shader_parameter/outline_thickness = 0.00999999977648
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mm8aj"]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource("4_17px3")
+shader_parameter/albedo_texture = ExtResource("3_17px3")
+shader_parameter/highlight_color = Color(0.2, 0.6, 1, 1)
+shader_parameter/highlight_strength = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ibgg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_4gula")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_17px3")
+}],
+"loop": 0,
+"name": &"damage",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_17px3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_4gula")
+}],
+"loop": 1,
+"name": &"death",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_17px3")
+}],
+"loop": 1,
+"name": &"front",
+"speed": 5.0
+}]
+
+[node name="Boss" type="CharacterBody3D" unique_id=578466623 groups=["enemy"]]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_x1w8q")
+clone_scene = ExtResource("2_gga3v")
+max_health = 15
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=195285334]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.42338872, 0)
+shape = SubResource("BoxShape3D_cdqbm")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=1104612094]
+transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 0, 0.31057474, 0)
+material_override = SubResource("ShaderMaterial_2wc3h")
+material_overlay = SubResource("ShaderMaterial_mm8aj")
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_8ibgg")
+animation = &"front"
+script = ExtResource("5_4gula")
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=841625462]
+target_position = Vector3(0, 0, 25)
+debug_shape_custom_color = Color(1, 0, 0, 1)
+debug_shape_thickness = 5
+
+[node name="DeathSFX" type="AudioStreamPlayer3D" parent="." unique_id=524179806]
+stream = ExtResource("6_bg8be")
+volume_db = -10.0
+
+[node name="DamageSFX" type="AudioStreamPlayer3D" parent="." unique_id=948148048]
+stream = ExtResource("9_17px3")
+volume_db = 5.0
+
+[node name="CloneSFX" type="AudioStreamPlayer3D" parent="." unique_id=387772840]
+stream = ExtResource("10_bg8be")
+volume_db = 5.0
+
+[node name="ExplosionSFX" type="AudioStreamPlayer3D" parent="." unique_id=1161114352]
+stream = ExtResource("11_e7px0")
+volume_db = 2.0
+max_polyphony = 15

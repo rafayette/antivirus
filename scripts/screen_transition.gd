@@ -4,8 +4,8 @@ extends CanvasLayer
 var target_scene: String = ""
 var current_tween: Tween = null
 
-func change_scene(scene_path: String) -> void:
-	# cancel any transition already in progress
+func change_scene(scene_path: String, play_sfx: bool = false) -> void:
+	
 	if current_tween and current_tween.is_valid():
 		current_tween.kill()
 	
@@ -20,6 +20,8 @@ func change_scene(scene_path: String) -> void:
 	mat.set_shader_parameter("melt_progress", 0.0)
 	
 	get_tree().change_scene_to_file(target_scene)
+	if play_sfx:
+		$SFX.play()
 	
 	current_tween = create_tween()
 	current_tween.tween_method(_set_melt, 0.0, 1.0, 1.2)

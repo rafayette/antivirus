@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d1gpm6pahp0ej" path="res://scripts/pepsi_man.gd" id="1_2o2l7"]
 [ext_resource type="Shader" uid="uid://c7w7nfo4u448a" path="res://shaders/enemyfade.gdshader" id="2_tssec"]
-[ext_resource type="Texture2D" path="res://assets/placeholder_enemy.jpg" id="3_s0lov"]
+[ext_resource type="Texture2D" uid="uid://cms4srgmlvi10" path="res://assets/enemies/pepsiman/placeholder_enemy.jpg" id="3_s0lov"]
 [ext_resource type="AudioStream" uid="uid://c52fta4mnwv8y" path="res://assets/sfx/virusDie.wav" id="4_k4ipx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cdqbm"]

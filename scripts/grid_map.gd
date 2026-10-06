@@ -1,4 +1,6 @@
 extends GridMap
+enum Directions {HORIZONTAL, VERTICAL, DIAGONAL}
+@export var direction = Directions.VERTICAL
 @onready var grid = $"."
 @onready var environment: Environment = $"../WorldEnvironment".environment
 var mat: StandardMaterial3D
@@ -13,5 +15,13 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if mat:
-		mat.uv1_offset.y += delta * 0.5
+		if direction == Directions.VERTICAL:
+			mat.uv1_offset.y += delta * 0.5
+		elif direction == Directions.HORIZONTAL:
+			mat.uv1_offset.x += delta * 0.5
+			mat.uv1_offset.z -= delta * 0.5
+		elif direction == Directions.DIAGONAL:
+			mat.uv1_offset.x += delta * 0.5
+			mat.uv1_offset.z -= delta * 0.5
+			mat.uv1_offset.y -= delta * 0.5
 		environment.sky_rotation.y += delta * 0.05

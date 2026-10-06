@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://ba4fmkua476u4"]
 
+[ext_resource type="Script" uid="uid://be03wrvfmm5vf" path="res://scenes/levels/level_manager.gd" id="1_bahl2"]
 [ext_resource type="PackedScene" uid="uid://l0t8fvghaj8c" path="res://scenes/misc/post_processing.tscn" id="1_excbq"]
 [ext_resource type="MeshLibrary" uid="uid://cdhy2ufet1rm5" path="res://assets/meshes/circuit.meshlib" id="1_noarx"]
+[ext_resource type="PackedScene" uid="uid://d2hoxfl4obk0h" path="res://scenes/enemies/key.tscn" id="2_bahl2"]
 [ext_resource type="Texture2D" uid="uid://c2qpwi1433y5c" path="res://assets/textures/sky.png" id="2_wc5p8"]
 [ext_resource type="Script" uid="uid://curnnfrqxcvv" path="res://scripts/grid_map.gd" id="3_i5arm"]
 [ext_resource type="Texture2D" uid="uid://cx4nsty8fx1mn" path="res://assets/textures/floor.png" id="5_nu31w"]
@@ -13,6 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://dowdmdiarvy3o" path="res://scenes/enemies/malware.tscn" id="11_dnkej"]
 [ext_resource type="PackedScene" uid="uid://df80n2rllkr8c" path="res://scenes/enemies/adware.tscn" id="12_iav0o"]
 [ext_resource type="PackedScene" uid="uid://ck7p3ssbcmo5h" path="res://scenes/enemies/item.tscn" id="14_mm8aj"]
+[ext_resource type="Texture2D" uid="uid://bg4ln2sa8wuxi" path="res://assets/textures/keyhole.png" id="15_wtwp4"]
+[ext_resource type="Script" uid="uid://c5t0rcr63knx5" path="res://scenes/levels/key_hole_area.gd" id="18_np2pn"]
+[ext_resource type="PackedScene" uid="uid://dqbnk365j4qt4" path="res://scenes/levels/level_2.tscn" id="19_v6ha0"]
 [ext_resource type="PackedScene" uid="uid://cno6k21ggiydk" path="res://scenes/misc/pause.tscn" id="28_x7jkp"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jw77y"]
@@ -36,7 +41,22 @@ albedo_texture = ExtResource("5_nu31w")
 uv1_scale = Vector3(5, 5, 5)
 uv1_triplanar = true
 
-[node name="Main" type="Node3D" unique_id=303821375]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nrrw6"]
+transparency = 1
+albedo_texture = ExtResource("15_wtwp4")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_cjccb"]
+material = SubResource("StandardMaterial3D_nrrw6")
+size = Vector2(1.32, 1.58)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cjccb"]
+size = Vector3(1.7734375, 2.4572754, 0.89575195)
+
+[node name="Main" type="Node3D" unique_id=303821375 node_paths=PackedStringArray("enemy_spawners") groups=["level_manager"]]
+script = ExtResource("1_bahl2")
+enemy_spawners = [NodePath("MalwareSpawns")]
+key_scene = ExtResource("2_bahl2")
 
 [node name="PostProcessing" parent="." unique_id=1485310485 instance=ExtResource("1_excbq")]
 
@@ -62,7 +82,7 @@ visible = false
 size = Vector3(1, 2, 1)
 
 [node name="Player" parent="." unique_id=1363583805 instance=ExtResource("6_iav0o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3888321, 27.398506)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.3888321, 27.398506)
 
 [node name="UI" parent="." unique_id=1377319999 instance=ExtResource("7_dnkej")]
 
@@ -74,6 +94,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3888321, 27.398506)
 
 [node name="MalwareSpawns" parent="." unique_id=1498578085 node_paths=PackedStringArray("spawn_points") instance=ExtResource("10_iwr0g")]
 enemy_scene = ExtResource("11_dnkej")
+max_enemies = 5
+total_enemies_to_spawn = 5
+check_interval = 0.1
 spawn_points = [NodePath("Spawn"), NodePath("Spawn2"), NodePath("Spawn3"), NodePath("Spawn4"), NodePath("Spawn5"), NodePath("Spawn6"), NodePath("Spawn7"), NodePath("Spawn8"), NodePath("Spawn9")]
 
 [node name="Spawn" type="Marker3D" parent="MalwareSpawns" unique_id=1337778045]
@@ -104,6 +127,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.195234, 1.455, 15.165621)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.768227, 1.455, -23.624123)
 
 [node name="AdwareSpawns" parent="." unique_id=1535756121 node_paths=PackedStringArray("spawn_points") instance=ExtResource("10_iwr0g")]
+enabled = false
 enemy_scene = ExtResource("12_iav0o")
 max_enemies = 5
 spawn_points = [NodePath("Spawn"), NodePath("Spawn2"), NodePath("Spawn3"), NodePath("Spawn4"), NodePath("Spawn5"), NodePath("Spawn6"), NodePath("Spawn7"), NodePath("Spawn8"), NodePath("Spawn9")]
@@ -138,6 +162,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.768227, 1.455, -23.624123
 [node name="ItemSpawns" parent="." unique_id=272776584 node_paths=PackedStringArray("spawn_points") instance=ExtResource("10_iwr0g")]
 enemy_scene = ExtResource("14_mm8aj")
 max_enemies = 5
+total_enemies_to_spawn = 5
 spawn_points = [NodePath("Spawn"), NodePath("Spawn2"), NodePath("Spawn3"), NodePath("Spawn4"), NodePath("Spawn5")]
 is_item = true
 
@@ -157,3 +182,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.206497, 0.823, -24.081705
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.04415, 0.823, 3.6807613)
 
 [node name="PauseScreen" parent="." unique_id=1491325493 instance=ExtResource("28_x7jkp")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1957194854]
+transform = Transform3D(-1.5381027, 1.3446521e-07, -5.8776603e-15, 0, -6.723259e-08, -1.5381027, -1.3446521e-07, -1.5381027, 6.723259e-08, -0.044628978, 1.9302998, 34.971066)
+mesh = SubResource("PlaneMesh_cjccb")
+
+[node name="KeyHoleArea" type="Area3D" parent="." unique_id=1833102288]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1076641, 34.217075)
+collision_layer = 2
+script = ExtResource("18_np2pn")
+next_level = ExtResource("19_v6ha0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KeyHoleArea" unique_id=1264731893]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16308594, 0.18884277, 0.47466278)
+shape = SubResource("BoxShape3D_cjccb")
+
+[connection signal="body_entered" from="KeyHoleArea" to="KeyHoleArea" method="_on_body_entered"]

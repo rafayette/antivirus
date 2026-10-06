@@ -10,6 +10,7 @@ func _ready() -> void:
 	item_type = ItemTypes.values().pick_random()
 	#speed = 0.0
 	chases_player = false
+	add_to_group("item")
 
 func pick_up(player: Player) -> void:
 	match item_type:

@@ -3,6 +3,7 @@
 [ext_resource type="AudioStream" uid="uid://d2opd13uybi67" path="res://assets/sfx/overheatWarning.wav" id="1_u3kru"]
 [ext_resource type="AudioStream" uid="uid://beqappb4eym33" path="res://assets/sfx/gameOver.wav" id="2_sk8qu"]
 [ext_resource type="AudioStream" uid="uid://bgrsnwf1bdww2" path="res://assets/sfx/collectItem.wav" id="3_qkw8g"]
+[ext_resource type="AudioStream" uid="uid://qiaw2d7iejk3" path="res://assets/sfx/keyDisappear.wav" id="3_un2sw"]
 [ext_resource type="AudioStream" uid="uid://dxtvo46xq56gu" path="res://assets/sfx/zipBomb.wav" id="4_odpf5"]
 [ext_resource type="AudioStream" uid="uid://dq58xas1hrfqk" path="res://assets/sfx/scan.wav" id="4_un2sw"]
 
@@ -15,6 +16,10 @@ stream = ExtResource("1_u3kru")
 process_mode = 3
 stream = ExtResource("2_sk8qu")
 
+[node name="BossSpawn" type="AudioStreamPlayer" parent="." unique_id=1426613404]
+process_mode = 3
+stream = ExtResource("3_un2sw")
+
 [node name="Item" type="AudioStreamPlayer" parent="." unique_id=916895169]
 process_mode = 3
 stream = ExtResource("3_qkw8g")
@@ -22,6 +27,7 @@ stream = ExtResource("3_qkw8g")
 [node name="Scan" type="AudioStreamPlayer" parent="." unique_id=415983721]
 process_mode = 3
 stream = ExtResource("4_un2sw")
+volume_db = -1.0
 
 [node name="Bomb" type="AudioStreamPlayer" parent="." unique_id=159470864]
 process_mode = 3

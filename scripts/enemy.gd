@@ -6,6 +6,8 @@ extends CharacterBody3D
 @export var speed: float = 7.0
 @export var max_health: int = 1
 @export var chases_player := true
+@export var can_die := true
+@export var true_speed = 1.0
 signal dying
 
 @onready var player: Node3D = get_tree().get_first_node_in_group("player")
@@ -39,7 +41,7 @@ func _update_target() -> void:
 	if raycast.is_colliding():
 		var object_colliding = raycast.get_collider()
 		if object_colliding == player:
-			target_velocity = lookat
+			target_velocity = lookat.normalized() * true_speed
 
 func _move(delta: float) -> void:
 	if not chases_player:
@@ -56,27 +58,47 @@ func _ready() -> void:
 	#sprite.material_override = dissolve_material
 	add_to_group("enemy")
 
+func damage_effect() -> void:
+	pass
+
 func take_damage(amount: int) -> void:
 	if is_dying:
 		return
 	health -= amount
 	if health <= 0:
 		die()
+	else:
+		damage_effect()
+
+func effect_finished() -> void:
+	var level_manager: Node = get_tree().get_first_node_in_group("level_manager")
+	if level_manager:
+		level_manager.check_for_level_complete(global_position)
+	queue_free()
+
+func death_effect() -> void:
+	var tween := create_tween()
+	tween.tween_method(_set_dissolve, 0.0, 0.5, 0.8)
+	tween.tween_callback(effect_finished)
 
 func die() -> void:
+	if not can_die:
+		return
 	var xray_material: ShaderMaterial = sprite.material_overlay
 	xray_material.set_shader_parameter("highlight_strength", 0.0)
 	is_dying = true
 	dying.emit()
+	remove_from_group("enemy")
+	var level_manager: Node = get_tree().get_first_node_in_group("level_manager")
+	if level_manager:
+		level_manager.check_for_level_complete(global_position)
 	set_physics_process(false)
 	var col_shape := $CollisionShape3D
 	col_shape.disabled = true
 	
 	$DeathSFX.play()
 	
-	var tween := create_tween()
-	tween.tween_method(_set_dissolve, 0.0, 0.5, 0.8)
-	tween.tween_callback(queue_free)
+	death_effect()
 
 func _set_dissolve(value: float) -> void:
 	var material: ShaderMaterial = sprite.material_override
