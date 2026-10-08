@@ -190,6 +190,9 @@ frame = 4
 frame_progress = 1.0
 offset = Vector2(0, 462)
 script = ExtResource("12_3qs63")
+bob_speed_x = null
+bob_size_x = null
+bob_size_y = null
 
 [node name="ItemLabel" type="Label" parent="." unique_id=216530222]
 modulate = Color(1, 1, 1, 0)

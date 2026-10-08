@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dilxam74n22db"]
+
+[ext_resource type="Shader" uid="uid://byu5usb6clx7t" path="res://scenes/enemies/enemy_highlight.gdshader" id="1_kri7y"]
+[ext_resource type="Texture2D" uid="uid://bg4ln2sa8wuxi" path="res://assets/textures/keyhole.png" id="2_ilkph"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_kri7y")
+shader_parameter/albedo_texture = ExtResource("2_ilkph")
+shader_parameter/highlight_color = Color(0.85882354, 0.7529412, 0, 1)
+shader_parameter/highlight_strength = 0.0

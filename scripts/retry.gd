@@ -1,6 +1,7 @@
 extends Label
 
 @onready var pause_screen = $"../../PauseScreen"
+@export var is_variant = false
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -11,6 +12,8 @@ func _on_gui_input(event: InputEvent) -> void:
 		get_tree().reload_current_scene()
 
 func _input(event: InputEvent) -> void:
+	if is_variant:
+		return
 	if event.is_action("pause") and event.is_pressed():
 		if get_tree().paused == true:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

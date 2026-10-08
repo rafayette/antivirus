@@ -94,6 +94,7 @@ func damage_effect() -> void:
 		sky_mat.set_shader_parameter("reveal_amount", 0.0)
 
 func _ready() -> void:
+	add_to_group("entity")
 	sprite = $AnimatedSprite3D
 	temperature_per_tick = 3
 	health = max_health

@@ -17,7 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://ck7p3ssbcmo5h" path="res://scenes/enemies/item.tscn" id="15_rvwo1"]
 [ext_resource type="PackedScene" uid="uid://cno6k21ggiydk" path="res://scenes/misc/pause.tscn" id="16_yxkvy"]
 [ext_resource type="Texture2D" uid="uid://bg4ln2sa8wuxi" path="res://assets/textures/keyhole.png" id="17_joiyc"]
+[ext_resource type="Material" uid="uid://dilxam74n22db" path="res://shaders/keyhole_material.tres" id="17_sbygb"]
 [ext_resource type="Script" uid="uid://c5t0rcr63knx5" path="res://scenes/levels/key_hole_area.gd" id="18_tn15g"]
+[ext_resource type="Script" uid="uid://c23sgn3kmrfdj" path="res://scenes/levels/mesh_instance_3d.gd" id="19_5niy6"]
 [ext_resource type="PackedScene" uid="uid://cgj3n25qg4yh8" path="res://scenes/levels/level_3.tscn" id="19_p4se4"]
 [ext_resource type="AudioStream" uid="uid://dcql3u3qhiuuj" path="res://assets/music/stage2.ogg" id="20_lkn2k"]
 [ext_resource type="Script" uid="uid://ck4rm66x7e3rw" path="res://scenes/levels/music.gd" id="21_sbygb"]
@@ -188,9 +190,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.04415, 0.823, 3.6807613)
 
 [node name="PauseScreen" parent="." unique_id=1491325493 instance=ExtResource("16_yxkvy")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1957194854]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1957194854 groups=["keyhole"]]
 transform = Transform3D(-1.5381027, 1.3446521e-07, -5.8776603e-15, 0, -6.723259e-08, -1.5381027, -1.3446521e-07, -1.5381027, 6.723259e-08, -0.044628978, 1.9302998, 34.971066)
+material_overlay = ExtResource("17_sbygb")
 mesh = SubResource("PlaneMesh_cjccb")
+script = ExtResource("19_5niy6")
 
 [node name="KeyHoleArea" type="Area3D" parent="." unique_id=1833102288]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1076641, 34.217075)
@@ -202,7 +206,7 @@ next_level = ExtResource("19_p4se4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16308594, 0.18884277, 0.47466278)
 shape = SubResource("BoxShape3D_cjccb")
 
-[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1116503033]
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1116503033 groups=["music"]]
 stream = ExtResource("20_lkn2k")
 script = ExtResource("21_sbygb")
 

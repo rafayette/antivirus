@@ -1,6 +1,6 @@
 extends Camera3D
 
-@onready var player: CharacterBody3D = get_tree().get_first_node_in_group("player")
+@onready var player: Player = get_tree().get_first_node_in_group("player")
 @export var damage: float = 1.0
 @export var shoot_range: float = 100.0
 @export var return_speed: float = 8.0
@@ -59,7 +59,7 @@ func fire() -> void:
 	
 	_spawn_laser_visual(from, result.get("position", to))
 	
-	if result and result.collider.is_in_group("enemy"):
+	if result and (result.collider.is_in_group("enemy") or result.collider.is_in_group("item")):
 		result.collider.take_damage(damage)
 
 func _ready() -> void:

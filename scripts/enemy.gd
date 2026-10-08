@@ -57,11 +57,14 @@ func _ready() -> void:
 	dissolve_material = sprite.material_override
 	#sprite.material_override = dissolve_material
 	add_to_group("enemy")
+	add_to_group("entity")
 
 func damage_effect() -> void:
 	pass
 
 func take_damage(amount: int) -> void:
+	if not can_die:
+		return
 	if is_dying:
 		return
 	health -= amount

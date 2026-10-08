@@ -6,6 +6,7 @@
 [ext_resource type="Shader" uid="uid://dyf5o3f3vm2up" path="res://scenes/levels/enemy_sky.gdshader" id="4_1nwmf"]
 [ext_resource type="Texture2D" uid="uid://do5magif6xubk" path="res://assets/enemies/youareanidiot/black.png" id="5_5f5xw"]
 [ext_resource type="MeshLibrary" uid="uid://d13oxnm4b6h0c" path="res://assets/meshes/circuit3.meshlib" id="5_vmg1d"]
+[ext_resource type="Script" uid="uid://d1twt64mugsgg" path="res://scenes/levels/level_3_world.gd" id="6_aey3y"]
 [ext_resource type="Script" uid="uid://curnnfrqxcvv" path="res://scripts/grid_map.gd" id="6_kdsi4"]
 [ext_resource type="Texture2D" uid="uid://cx4nsty8fx1mn" path="res://assets/textures/floor.png" id="7_kva3v"]
 [ext_resource type="PackedScene" uid="uid://it8rc8h7w7gc" path="res://scenes/misc/player.tscn" id="8_jql0x"]
@@ -19,8 +20,14 @@
 [ext_resource type="PackedScene" uid="uid://cno6k21ggiydk" path="res://scenes/misc/pause.tscn" id="16_2qmps"]
 [ext_resource type="Texture2D" uid="uid://bg4ln2sa8wuxi" path="res://assets/textures/keyhole.png" id="17_gtyp3"]
 [ext_resource type="Script" uid="uid://c5t0rcr63knx5" path="res://scenes/levels/key_hole_area.gd" id="18_n7m6w"]
+[ext_resource type="Material" uid="uid://dilxam74n22db" path="res://shaders/keyhole_material.tres" id="18_o3ttr"]
 [ext_resource type="PackedScene" uid="uid://dkelt6hil1v5g" path="res://scenes/enemies/youareanidiot.tscn" id="19_vmg1d"]
 [ext_resource type="PackedScene" uid="uid://dtkqmp6r4cx4c" path="res://scenes/misc/credits.tscn" id="20_5f5xw"]
+[ext_resource type="Script" uid="uid://c23sgn3kmrfdj" path="res://scenes/levels/mesh_instance_3d.gd" id="20_n8qcm"]
+[ext_resource type="AudioStream" uid="uid://iiiwsp7aasp" path="res://assets/music/stage3.mp3" id="23_jql0x"]
+[ext_resource type="Script" uid="uid://ck4rm66x7e3rw" path="res://scenes/levels/music.gd" id="24_do6pa"]
+[ext_resource type="AudioStream" uid="uid://c4u6rbcfqrbrv" path="res://assets/music/boss.mp3" id="25_n8qcm"]
+[ext_resource type="PackedScene" uid="uid://dnjq8fmqk1e6g" path="res://scenes/misc/game_over_boss.tscn" id="26_do6pa"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c1fj7"]
 shader = ExtResource("4_1nwmf")
@@ -31,8 +38,8 @@ shader_parameter/dark_tint = Color(0.24705882, 0.24705882, 0.24705882, 1)
 shader_parameter/crystal_color_a = Color(0, 0, 0, 1)
 shader_parameter/crystal_color_b = Color(0.78431374, 0.78431374, 0.78431374, 1)
 shader_parameter/crystal_bg = Color(0, 0, 0, 1)
-shader_parameter/crystal_scale = 8.0
-shader_parameter/edge_sharpness = 20.0
+shader_parameter/crystal_scale = 4.000000142499999
+shader_parameter/edge_sharpness = 50.0
 shader_parameter/crystal_anim_speed = 0.05
 shader_parameter/sprite_spin_speed = 0.1000000997499999
 
@@ -75,6 +82,7 @@ key_scene = ExtResource("2_vmg1d")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1474852218]
 environment = SubResource("Environment_cjccb")
+script = ExtResource("6_aey3y")
 
 [node name="GridMap" type="GridMap" parent="." unique_id=185760136]
 mesh_library = ExtResource("5_vmg1d")
@@ -199,9 +207,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.04415, 0.823, 3.6807613)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1957194854 groups=["keyhole"]]
 transform = Transform3D(-1.5381027, 1.3446521e-07, -5.8776603e-15, 0, -6.723259e-08, -1.5381027, -1.3446521e-07, -1.5381027, 6.723259e-08, -0.044628978, 1.9302998, 34.971066)
+material_overlay = ExtResource("18_o3ttr")
 mesh = SubResource("PlaneMesh_cjccb")
+script = ExtResource("20_n8qcm")
 
-[node name="KeyHoleArea" type="Area3D" parent="." unique_id=1833102288]
+[node name="KeyHoleArea" type="Area3D" parent="." unique_id=1833102288 groups=["keyhole"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1076641, 34.217075)
 collision_layer = 2
 script = ExtResource("18_n7m6w")
@@ -215,5 +225,14 @@ shape = SubResource("BoxShape3D_cjccb")
 
 [node name="BossSpawnPoint" type="Marker3D" parent="." unique_id=1262375100]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.867, 17.569)
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=831593056 groups=["music"]]
+stream = ExtResource("23_jql0x")
+script = ExtResource("24_do6pa")
+
+[node name="BossMusic" type="AudioStreamPlayer" parent="." unique_id=2133719141]
+stream = ExtResource("25_n8qcm")
+
+[node name="GameOverBoss" parent="." unique_id=905026355 instance=ExtResource("26_do6pa")]
 
 [connection signal="body_entered" from="KeyHoleArea" to="KeyHoleArea" method="_on_body_entered"]

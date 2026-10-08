@@ -34,7 +34,7 @@ func _on_timer_timeout() -> void:
 	if total_enemies_to_spawn > 0 and total_spawned >= total_enemies_to_spawn:
 		return
 	
-	var current_enemy_count: int = get_tree().get_nodes_in_group("enemy").size() - get_tree().get_nodes_in_group("item").size()
+	var current_enemy_count: int = get_tree().get_nodes_in_group("enemy").size()
 	if is_item == true:
 		current_enemy_count = get_tree().get_nodes_in_group("item").size()
 	

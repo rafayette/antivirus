@@ -30,7 +30,7 @@ fog_light_energy = 0.51
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hafda"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gmv4x"]
-line_spacing = 0.0
+line_spacing = -20.0
 font = ExtResource("3_eohmq")
 font_size = 32
 font_color = Color(0, 0.58431375, 0, 1)

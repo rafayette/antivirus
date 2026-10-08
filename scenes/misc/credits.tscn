@@ -28,6 +28,7 @@ fog_light_energy = 0.51
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hafda"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cjccb"]
+line_spacing = 0.0
 font = ExtResource("3_wndol")
 font_size = 32
 
@@ -95,12 +96,15 @@ texture_filter = 3
 material = SubResource("ShaderMaterial_hafda")
 offset_left = 28.0
 offset_top = 26.0
-offset_right = 348.0
-offset_bottom = 91.0
+offset_right = 876.0
+offset_bottom = 707.0
 text = "// DESENVOLVEDORES
 > Programação: Rafael Brandão
 > Arte: Arthur Lima
 > Game design: Nathan Lucas
+> Trilha sonora: Bryan Phellipe
+> Game testers: Pietro Monteiro, Yuri Roberto, 
+	Gabriel Rodrigues, Victor Queres
 
 // EXTRA
 > Sons de game over & overheat foram feitos com sfxr;

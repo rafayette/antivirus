@@ -8,6 +8,8 @@ func _input(event: InputEvent) -> void:
 		if get_tree().paused == true:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			get_tree().paused = false
+			ScreenTransition.counting = true
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 			get_tree().paused = true
+			ScreenTransition.counting = false

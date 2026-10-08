@@ -11,6 +11,8 @@ func _ready() -> void:
 	chases_player = false
 
 func _process(delta: float) -> void:
+	add_to_group("entity")
+	global_position.y = 1.2
 	var distance = global_position.distance_to(player.global_position)
 	if distance < 15.0:
 		var intensity = 1.0 - (distance / 15.0)  # 0.0 to 1.0

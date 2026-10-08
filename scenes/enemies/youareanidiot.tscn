@@ -23,7 +23,7 @@ shader_parameter/albedo_texture = ExtResource("3_17px3")
 shader_parameter/dissolve_progress = 0.0
 shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/scanline_color = Color(0, 0, 0, 1)
-shader_parameter/scanline_width = 0.020000000950000003
+shader_parameter/scanline_width = 0.02000000095
 shader_parameter/outline_thickness = 0.00999999977648
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mm8aj"]
@@ -31,7 +31,7 @@ resource_local_to_scene = true
 render_priority = 1
 shader = ExtResource("4_17px3")
 shader_parameter/albedo_texture = ExtResource("3_17px3")
-shader_parameter/highlight_color = Color(0.2, 0.6, 1, 1)
+shader_parameter/highlight_color = Color(1, 1, 1, 1)
 shader_parameter/highlight_strength = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8ibgg"]
@@ -79,7 +79,7 @@ transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.42338872, 0)
 shape = SubResource("BoxShape3D_cdqbm")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=1104612094]
-transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 0, 0.31057474, 0)
+transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 0, 0.12793025, 0)
 material_override = SubResource("ShaderMaterial_2wc3h")
 material_overlay = SubResource("ShaderMaterial_mm8aj")
 billboard = 2

@@ -11,10 +11,12 @@ func _ready() -> void:
 	#speed = 0.0
 	chases_player = false
 	add_to_group("item")
+	add_to_group("entity")
+	remove_from_group("enemy")
 	if item_type == ItemTypes.Bomb:
 		sprite.material_overlay.set_shader_parameter("highlight_color", Color.html("#ff0000"))
 
-func pick_up(player: Player) -> void:
+func pick_up(_player: Player) -> void:
 	match item_type:
 		ItemTypes.Cooling:
 			player.temperature -= 40

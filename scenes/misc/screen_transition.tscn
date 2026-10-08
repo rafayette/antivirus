@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://cnepoj0kegsm" path="res://scripts/screen_transition.gd" id="1_47y2t"]
 [ext_resource type="Shader" uid="uid://cvr04pmho0q06" path="res://shaders/menu_melt.gdshader" id="2_5ofoy"]
 [ext_resource type="AudioStream" uid="uid://f1rx8o3jtg2w" path="res://assets/sfx/changeLevel.wav" id="3_5ofoy"]
+[ext_resource type="FontFile" uid="uid://bcsvyrbeoy3l3" path="res://assets/fonts/Segoe UI Bold.ttf" id="4_wicar"]
+[ext_resource type="Script" uid="uid://lgo6l0r35hwl" path="res://scenes/misc/gradient.gd" id="5_mx4u3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_131ss"]
 shader = ExtResource("2_5ofoy")
@@ -10,8 +12,28 @@ shader_parameter/melt_progress = 0.0
 shader_parameter/column_count = 120.0
 shader_parameter/randomness = 0.4
 
+[sub_resource type="Theme" id="Theme_8ibgg"]
+default_font = ExtResource("4_wicar")
+default_font_size = 64
+
+[sub_resource type="Gradient" id="Gradient_wicar"]
+offsets = PackedFloat32Array(0.024096385, 1)
+colors = PackedColorArray(0, 1, 0, 1, 0.93664825, 0.9999998, 0.9295795, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uknyc"]
+gradient = SubResource("Gradient_wicar")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_mx4u3"]
+colors = PackedColorArray(0, 0, 0, 1, 0.12955844, 0.1295585, 0.12955841, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hnrbg"]
+gradient = SubResource("Gradient_mx4u3")
+fill_to = Vector2(0, 1)
+
 [node name="ScreenTransition" type="CanvasLayer" unique_id=1611283490]
 layer = 100
+visible = false
 script = ExtResource("1_47y2t")
 
 [node name="MeltRect" type="TextureRect" parent="." unique_id=1693508321]
@@ -23,3 +45,28 @@ mouse_filter = 2
 
 [node name="SFX" type="AudioStreamPlayer" parent="." unique_id=2049093442]
 stream = ExtResource("3_5ofoy")
+
+[node name="Timer" type="RichTextLabel" parent="." unique_id=385636383]
+clip_children = 2
+z_index = 2
+offset_left = 5.0
+offset_top = -5.0
+offset_right = 270.0
+offset_bottom = 79.0
+theme = SubResource("Theme_8ibgg")
+text = "00:00:00"
+
+[node name="RichTextGradientEffect" type="Control" parent="Timer" unique_id=2106029224]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -416.0
+offset_bottom = -54.0
+script = ExtResource("5_mx4u3")
+texture = SubResource("GradientTexture2D_uknyc")
+metadata/_custom_type_script = "uid://lgo6l0r35hwl"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1136163204]
+offset_right = 265.0
+offset_bottom = 84.0
+texture = SubResource("GradientTexture2D_hnrbg")

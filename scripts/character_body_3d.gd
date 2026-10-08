@@ -4,14 +4,18 @@ class_name Player
 var SPEED := 7.0
 const ACCEL = 3.0
 const FRICTION = 1.8
-var temperaturePerTick = 0
+@export var temperaturePerTick = 0
 var timer = 0.0
 var over_clocking = false
+@export var looking_back = false
 
+@export var joystick_turn_speed := 6
+@export var fighting_boss = false
 @export var has_key = false
 @export var temperature = 40.0
 @export var ram = 100.0
 @onready var damageCheck = $DamageCheck
+@onready var ui_layer: CanvasLayer = $"../UI"
 @onready var statusBar: ShaderMaterial = $"../UI/StatusBar".material
 @onready var statusBarBackground: ShaderMaterial = $"../UI/StatusBarBackground".material
 @onready var weapon_sprite: ShaderMaterial = $"../UI/Weapon".material
@@ -24,6 +28,7 @@ var over_clocking = false
 
 @onready var overheatSfx = $"../SoundEffects/OverheatAlert"
 @onready var gameOverSfx = $"../SoundEffects/GameOver"
+@onready var gameOverBossSfx = $"../SoundEffects/GameOverBoss"
 @onready var scanSfx = $"../SoundEffects/Scan"
 @onready var itemPickupSfx = $"../SoundEffects/Item"
 @onready var bombSfx = $"../SoundEffects/Bomb"
@@ -61,9 +66,11 @@ func toggle_overclock(toggle: bool) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("look_back"):
+		looking_back = true
 		camera.rotation.y += PI
 	elif event.is_action_released("look_back"):
 		camera.rotation.y -= PI
+		looking_back = false
 	if event.is_action_pressed("fullscreen"):
 		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
@@ -80,7 +87,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * 0.003)
 
+func check_camera(delta: float) -> void:
+	var camera_dir := Input.get_axis("turn_left", "turn_right")
+	var intensity = -camera_dir
+	rotate_y(joystick_turn_speed * intensity * delta)
+
 func _process(delta: float):
+	check_camera(delta)
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forwards", "move_backwards")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if ram <= 100.0 and not over_clocking:
@@ -93,6 +106,20 @@ func _process(delta: float):
 		if direction == Vector3.ZERO:
 			decrease = 0.2
 		temperature = maxf(40.0, temperature - decrease * delta * 60)
+		camera.h_offset = 0
+		camera.v_offset = 0
+		ui_layer.offset = Vector2.ZERO
+	else:
+		var offset = Vector2(
+			randf_range(-1, 1),
+			randf_range(-1, 1),
+		) * temperaturePerTick * 0.1
+		
+		#ui_layer.offset.x = offset.x * 300
+		#ui_layer.offset.y = offset.y * 300
+		camera.h_offset = offset.x
+		camera.v_offset = offset.y
+		
 	var percentage = (temperature - 40.0) / 90.0
 	statusBar.set_shader_parameter("heat_shift", percentage)
 	statusBarBackground.set_shader_parameter("heat_shift", percentage)
@@ -113,10 +140,15 @@ func _process(delta: float):
 		
 	if timer >= 5.0:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		$"../GameOver".visible = true
-		$"../UI".visible = false
+		if fighting_boss:
+			$"../GameOverBoss".visible = true
+			$"../UI".visible = false
+			gameOverBossSfx.play()
+		else:
+			$"../GameOver".visible = true
+			$"../UI".visible = false
+			gameOverSfx.play()
 		shaderRect.material.set_shader_parameter("pixel_size", 20)
-		gameOverSfx.play()
 		get_tree().paused = true
 
 func item_picked_up(label, isBomb) -> void:
@@ -178,7 +210,7 @@ func cast_scan_pulse(origin: Vector3, max_radius: float = 60.0, duration: float 
 	scanning = false
 
 func _tag_enemies_in_radius(origin: Vector3, radius: float, already_tagged: Array) -> void:
-	for enemy in get_tree().get_nodes_in_group("enemy"):
+	for enemy in get_tree().get_nodes_in_group("entity"):
 		if enemy in already_tagged:
 			continue
 		if origin.distance_to(enemy.global_position) <= radius:

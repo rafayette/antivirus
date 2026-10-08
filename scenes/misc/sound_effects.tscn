@@ -2,6 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://d2opd13uybi67" path="res://assets/sfx/overheatWarning.wav" id="1_u3kru"]
 [ext_resource type="AudioStream" uid="uid://beqappb4eym33" path="res://assets/sfx/gameOver.wav" id="2_sk8qu"]
+[ext_resource type="AudioStream" uid="uid://pklsv675otmc" path="res://assets/sfx/you-are-an-idiot.mp3" id="3_55dqh"]
 [ext_resource type="AudioStream" uid="uid://bgrsnwf1bdww2" path="res://assets/sfx/collectItem.wav" id="3_qkw8g"]
 [ext_resource type="AudioStream" uid="uid://qiaw2d7iejk3" path="res://assets/sfx/keyDisappear.wav" id="3_un2sw"]
 [ext_resource type="AudioStream" uid="uid://dxtvo46xq56gu" path="res://assets/sfx/zipBomb.wav" id="4_odpf5"]
@@ -15,6 +16,10 @@ stream = ExtResource("1_u3kru")
 [node name="GameOver" type="AudioStreamPlayer" parent="." unique_id=1873263240]
 process_mode = 3
 stream = ExtResource("2_sk8qu")
+
+[node name="GameOverBoss" type="AudioStreamPlayer" parent="." unique_id=1625903020]
+process_mode = 3
+stream = ExtResource("3_55dqh")
 
 [node name="BossSpawn" type="AudioStreamPlayer" parent="." unique_id=1426613404]
 process_mode = 3
