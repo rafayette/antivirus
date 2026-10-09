@@ -113,7 +113,7 @@ offset_right = 100.0
 offset_bottom = 45.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "! OVERHEATING !"
+text = "KEY_HEAT"
 label_settings = SubResource("LabelSettings_6iypd")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -190,9 +190,6 @@ frame = 4
 frame_progress = 1.0
 offset = Vector2(0, 462)
 script = ExtResource("12_3qs63")
-bob_speed_x = null
-bob_size_x = null
-bob_size_y = null
 
 [node name="ItemLabel" type="Label" parent="." unique_id=216530222]
 modulate = Color(1, 1, 1, 0)

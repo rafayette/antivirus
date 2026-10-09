@@ -98,19 +98,7 @@ offset_left = 28.0
 offset_top = 26.0
 offset_right = 876.0
 offset_bottom = 707.0
-text = "// DESENVOLVEDORES
-> Programação: Rafael Brandão
-> Arte: Arthur Lima
-> Game design: Nathan Lucas
-> Trilha sonora: Bryan Phellipe
-> Game testers: Pietro Monteiro, Yuri Roberto, 
-	Gabriel Rodrigues, Victor Queres
-
-// EXTRA
-> Sons de game over & overheat foram feitos com sfxr;
-> Fonte \"Broken Console\": dafont;
-> Fonte \"terminus\": ax86;
-> Bugdroid: Google;"
+text = "KEY_CRED_FULL"
 label_settings = SubResource("LabelSettings_cjccb")
 script = ExtResource("4_5ti58")
 

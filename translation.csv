@@ -1,0 +1,9 @@
+keys;pt_br;en
+"KEY_PLAY";"> jogar";"> play"
+"KEY_CREDITS";"> créditos";"> credits"
+"KEY_QUIT";"> sair";"> quit"
+"KEY_LANG";"> idioma";"> language"
+"KEY_CRED_FULL";"// DESENVOLVEDORES\n> Programação: Rafael Brandão\n> Arte: Arthur Lima\n> Game design: Nathan Lucas\n> Trilha sonora: Bryan Phellipe\n// EXTRA\n> Sons de game over & overheat foram feitos com SFXR\n> Fonte ""Broken Console"": dafont\n> Fonte ""terminus"": ax86\n> Bugdroid: Google";"// DEVELOPERS\n> Programming: Rafael Brandão\n> Art: Arthur Lima\n> Game design: Nathan Lucas\n> Soundtrack: Bryan Phellipe\n\n// EXTRA\n> Sound effects were made with SFXR\n> Font ""Broken Console"": dafont\n> Font ""terminus"": ax86\n> Bugdroid: Google"
+"KEY_RESUME";"continuar";"resume"
+"KEY_RETURN";"voltar ao título";"return to title"
+"KEY_HEAT";"! SOBREAQUECENDO !";"! OVERHEATING !"

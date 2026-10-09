@@ -56,7 +56,7 @@ texture_filter = 3
 material = SubResource("ShaderMaterial_hafda")
 layout_mode = 2
 mouse_filter = 0
-text = "> retomar"
+text = "KEY_RESUME"
 label_settings = SubResource("LabelSettings_05l2w")
 script = ExtResource("2_73bk0")
 
@@ -65,7 +65,7 @@ texture_filter = 3
 material = SubResource("ShaderMaterial_hafda")
 layout_mode = 2
 mouse_filter = 0
-text = "> voltar ao título"
+text = "KEY_RETURN"
 label_settings = SubResource("LabelSettings_05l2w")
 script = ExtResource("3_86pvl")
 

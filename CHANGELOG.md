@@ -1,6 +1,4 @@
-# v0.1.0
+# v0.1.1
 
-* Finished the game
-* Added speedrunning mode \[F1]
-* Added quality of life changes
-
+* Added a new "language" button to the main menu, allowing you to swap between Brazilian Portuguese and English.
+* Added localized popup images.

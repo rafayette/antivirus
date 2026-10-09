@@ -33,7 +33,6 @@ fill_to = Vector2(0, 1)
 
 [node name="ScreenTransition" type="CanvasLayer" unique_id=1611283490]
 layer = 100
-visible = false
 script = ExtResource("1_47y2t")
 
 [node name="MeltRect" type="TextureRect" parent="." unique_id=1693508321]
@@ -47,6 +46,7 @@ mouse_filter = 2
 stream = ExtResource("3_5ofoy")
 
 [node name="Timer" type="RichTextLabel" parent="." unique_id=385636383]
+visible = false
 clip_children = 2
 z_index = 2
 offset_left = 5.0
@@ -60,13 +60,12 @@ text = "00:00:00"
 anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -416.0
-offset_bottom = -54.0
 script = ExtResource("5_mx4u3")
 texture = SubResource("GradientTexture2D_uknyc")
 metadata/_custom_type_script = "uid://lgo6l0r35hwl"
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1136163204]
+visible = false
 offset_right = 265.0
 offset_bottom = 84.0
 texture = SubResource("GradientTexture2D_hnrbg")

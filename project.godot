@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="ANTIVIRUS"
-config/version="0.1"
+config/version="0.1.1"
 run/main_scene="uid://csgspsm0lvyvx"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="uid://bvge6615fsd7r"
@@ -22,6 +22,8 @@ ScreenTransition="*uid://c0byafj3llwij"
 
 [display]
 
+window/size/borderless=true
+window/size/maximize_disabled=true
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
@@ -134,6 +136,18 @@ turn_right={
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":2,"axis_value":1.0,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translation_remaps={
+"res://assets/enemies/adware/ad_1.png": PackedStringArray("res://assets/enemies/adware/ad_1_en.png:en"),
+"res://assets/enemies/adware/ad_2.png": PackedStringArray("res://assets/enemies/adware/ad_2_en.png:en"),
+"res://assets/enemies/adware/ad_3.png": PackedStringArray("res://assets/enemies/adware/ad_3_en.png:en"),
+"res://assets/enemies/adware/ad_4.png": PackedStringArray("res://assets/enemies/adware/ad_4_en.png:en"),
+"res://assets/enemies/adware/ad_5.png": PackedStringArray("res://assets/enemies/adware/ad_5_en.png:en"),
+"res://assets/enemies/adware/ad_6.png": PackedStringArray("res://assets/enemies/adware/ad_6_en.png:en")
+}
+locale/translations=PackedStringArray("res://translation.en.translation", "res://translation.pt.translation")
 
 [physics]
 

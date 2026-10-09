@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://xlfcclpwiuoq" path="res://scripts/version.gd" id="7_eohmq"]
 [ext_resource type="Shader" uid="uid://8ietow42vev6" path="res://shaders/crt.gdshader" id="7_ff23m"]
 [ext_resource type="Script" uid="uid://cxvbii2p23llp" path="res://scripts/quit.gd" id="7_igbr1"]
+[ext_resource type="Script" uid="uid://dckblovqqdgpx" path="res://scenes/misc/language.gd" id="8_6n3x0"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jw77y"]
 panorama = ExtResource("1_o1ls0")
@@ -120,10 +121,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -448.5
-offset_top = -65.5
-offset_right = -128.5
-offset_bottom = 137.5
+offset_left = -443.5
+offset_top = -100.0
+offset_right = -91.5
+offset_bottom = 172.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -132,7 +133,7 @@ texture_filter = 3
 material = SubResource("ShaderMaterial_hafda")
 layout_mode = 2
 mouse_filter = 0
-text = "> jogar"
+text = "KEY_PLAY"
 label_settings = SubResource("LabelSettings_05l2w")
 script = ExtResource("5_cq0pj")
 
@@ -141,7 +142,7 @@ texture_filter = 3
 material = SubResource("ShaderMaterial_hafda")
 layout_mode = 2
 mouse_filter = 0
-text = "> créditos"
+text = "KEY_CREDITS"
 label_settings = SubResource("LabelSettings_05l2w")
 script = ExtResource("6_cq0pj")
 
@@ -150,9 +151,18 @@ texture_filter = 3
 material = SubResource("ShaderMaterial_hafda")
 layout_mode = 2
 mouse_filter = 0
-text = "> sair"
+text = "KEY_QUIT"
 label_settings = SubResource("LabelSettings_05l2w")
 script = ExtResource("7_igbr1")
+
+[node name="Language" type="Label" parent="TitleUI/VBoxContainer" unique_id=1435327489]
+texture_filter = 3
+material = SubResource("ShaderMaterial_hafda")
+layout_mode = 2
+mouse_filter = 0
+text = "KEY_LANG"
+label_settings = SubResource("LabelSettings_05l2w")
+script = ExtResource("8_6n3x0")
 
 [node name="TextureRect" type="TextureRect" parent="TitleUI" unique_id=349582971]
 z_index = -1
@@ -199,3 +209,4 @@ mouse_filter = 2
 [connection signal="gui_input" from="TitleUI/VBoxContainer/Play" to="TitleUI/VBoxContainer/Play" method="_on_gui_input"]
 [connection signal="gui_input" from="TitleUI/VBoxContainer/Credits" to="TitleUI/VBoxContainer/Credits" method="_on_gui_input"]
 [connection signal="gui_input" from="TitleUI/VBoxContainer/Quit" to="TitleUI/VBoxContainer/Quit" method="_on_gui_input"]
+[connection signal="gui_input" from="TitleUI/VBoxContainer/Language" to="TitleUI/VBoxContainer/Language" method="_on_gui_input"]
